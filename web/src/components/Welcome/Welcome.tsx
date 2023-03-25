@@ -1,8 +1,20 @@
 import { useUserData } from '@src/stores/useUserData';
+import CustomerList from '../CustomerList';
+import Graphs from '../Graphs';
 
+import Menu from '../Menu';
 import MenuSide from '../MenuSide';
 import { ContainerStyled } from './styled';
 
+/**
+ * @export
+ * @component
+ * @name Welcome
+ *
+ * @description
+ * Responsável por chamar todos os componentes
+ * que renderizam a tela.
+ */
 export const Welcome = () => {
 	const { name, age } = useUserData();
 
@@ -11,9 +23,9 @@ export const Welcome = () => {
 			<MenuSide domain="https://app.dev.d1.cx" />
 
 			<ContainerStyled>
-				<h1>Hello World</h1>
-				<h2>{name}</h2>
-				<h3>{age}</h3>
+				<Menu />
+				<Graphs />
+				<CustomerList />
 			</ContainerStyled>
 		</>
 	);
