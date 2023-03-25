@@ -30,7 +30,7 @@ namespace Core.services
                 Messages = new ChatMessage[] {
             new ChatMessage(ChatMessageRole.User, "Hello!")}});
                         
-            var results= await _openAIAPI.Chat.CreateChatCompletionAsync("Hello!");
+            var results= await _openAIAPI.Chat.CreateChatCompletionAsync(message);
 
             var reply = results.Choices[0].Message;
             //Console.WriteLine($"{reply.Role}: {reply.Content.Trim()}");
