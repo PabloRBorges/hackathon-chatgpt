@@ -1,5 +1,17 @@
 import React from 'react';
-import { InputStyled, MenuSideStyled, WrapperTableAreaStyled } from './styled';
+
+import {
+  MOCK_TABLE,
+  STATUS_CANCELED,
+  STATUS_CANCELLING,
+} from '@src/configuration/contants/constants';
+
+import {
+  ContentSearchStyled,
+  InputStyled,
+  MenuSideStyled,
+  WrapperTableAreaStyled,
+} from './styled';
 
 /**
  * @export
@@ -10,59 +22,8 @@ import { InputStyled, MenuSideStyled, WrapperTableAreaStyled } from './styled';
  * Responsável por a área de listas de cancelamentos.
  */
 export const CustomerList = (): JSX.Element => {
-  const mockTable = [
-    {
-      name: 'Pablo Veloso',
-      contractTime: '1 ano',
-      historic: ['Financeiro', 'Suporte ruim'],
-      date: '23/08/2022 às 19:30',
-      status: 'Cancelado',
-      sentiment: 'Insatisfeito',
-    },
-    {
-      name: 'Pietro Brune',
-      contractTime: '1 ano',
-      historic: ['Financeiro', 'Suporte ruim'],
-      date: '15/01/2021 às 15:37',
-      status: 'Possível cancelamento',
-      sentiment: 'Neutro',
-    },
-    {
-      name: 'João Brito',
-      contractTime: '1 ano',
-      historic: ['Financeiro', 'Suporte ruim'],
-      date: '23/08/2022 às 19:30',
-      status: 'Cancelado',
-      sentiment: 'Insatisfeito',
-    },
-    {
-      name: 'Eduardo Henrique',
-      contractTime: '1 ano',
-      historic: ['Financeiro', 'Suporte ruim'],
-      date: '15/01/2021 às 15:37',
-      status: 'Baixa chance de cancelamento',
-      sentiment: 'Satisfeito',
-    },
-    {
-      name: 'João Brito',
-      contractTime: '1 ano',
-      historic: ['Financeiro', 'Suporte ruim'],
-      date: '23/08/2022 às 19:30',
-      status: 'Cancelado',
-      sentiment: 'Insatisfeito',
-    },
-    {
-      name: 'Pedro Borges',
-      contractTime: '1 ano',
-      historic: ['Financeiro', 'Suporte ruim'],
-      date: '15/01/2021 às 15:37',
-      status: 'Possível cancelamento',
-      sentiment: 'Insatisfeito',
-    },
-  ];
-
   const verifiedCustomertatus = (status: string) => {
-    if (status === 'Cancelado') {
+    if (status === STATUS_CANCELED) {
       return (
         <span className="badge is-danger is-light">
           <span className="icon is-medium">
@@ -72,7 +33,7 @@ export const CustomerList = (): JSX.Element => {
         </span>
       );
     }
-    if (status === 'Possível cancelamento') {
+    if (status === STATUS_CANCELLING) {
       return (
         <span className="badge is-warning is-light">
           <span className="icon is-medium">
@@ -94,11 +55,14 @@ export const CustomerList = (): JSX.Element => {
   return (
     <WrapperTableAreaStyled>
       <MenuSideStyled>Cancelamentos</MenuSideStyled>
-      <InputStyled
-        classNameName="ico-mglass"
-        type="text"
-        placeholder="Buscar clientes"
-      />
+      <ContentSearchStyled>
+        <p>Procure por clientes:</p>
+        <InputStyled
+          className="has-shadow-level-1 "
+          type="text"
+          placeholder="Buscar clientes"
+        />
+      </ContentSearchStyled>
 
       <table className="table is-fullwidth">
         <thead>
@@ -111,7 +75,7 @@ export const CustomerList = (): JSX.Element => {
           </tr>
         </thead>
         <tbody>
-          {mockTable.map((customer) => (
+          {MOCK_TABLE.map((customer) => (
             <tr>
               <td>{customer.name}</td>
 

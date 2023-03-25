@@ -14,16 +14,13 @@ export const Menu = (): JSX.Element => (
     <nav className="navbar has-shadow">
       <div className="navbar-brand">
         <a className="navbar-item">
-          <span className="navbar-item has-text-weight-bold is-size-4">
-            Cancelados
+          <span className="navbar-item has-text-danger-dark has-text-weight-bold is-size-4">
+            Cancelamentos
           </span>
         </a>
       </div>
 
       <div className="navbar-menu">
-        <div className="navbar-start">
-          <a className="navbar-item">Possíveis cancelamentos</a>
-        </div>
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="avatar is-primary">Z</div>

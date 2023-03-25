@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const WrapperTableAreaStyled = styled.div`
-  margin: 2rem 6rem;
+  margin: 2rem 6rem 6rem;
 `;
 
 export const MenuSideStyled = styled.div`
@@ -16,7 +16,8 @@ export const InputStyled = styled.input`
   border: none;
   border-radius: 0.5rem;
   box-shadow: 1px;
-  margin: 2rem 0;
+  margin-bottom: 2rem;
+  margin-top: 0.25rem;
 
   ::placeholder {
     font-weight: 400;
@@ -56,5 +57,16 @@ export const InputStyled = styled.input`
       -ms-transform: rotate(45deg);
       -o-transform: rotate(45deg);
     }
+  }
+`;
+
+export const ContentSearchStyled = styled.div`
+  font-size: 0.75rem;
+  color: #888;
+  display: flex;
+  flex-direction: column;
+  &&& {
+    margin: 0;
+    padding: 0;
   }
 `;

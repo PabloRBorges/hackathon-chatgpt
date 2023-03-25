@@ -6,6 +6,7 @@ export const ContainerGraphStyled = styled.div`
 `;
 
 export const ChartStyled = styled.div`
+  padding-top: 2rem;
   width: 410px;
   display: flex;
   gap: 5rem;

@@ -1,5 +1,6 @@
 import { useUserData } from '@src/stores/useUserData';
 import CustomerList from '../CustomerList';
+import Filters from '../Filters';
 import Graphs from '../Graphs';
 
 import Menu from '../Menu';
@@ -16,17 +17,18 @@ import { ContainerStyled } from './styled';
  * que renderizam a tela.
  */
 export const Welcome = () => {
-	const { name, age } = useUserData();
+  const { name, age } = useUserData();
 
-	return (
-		<>
-			<MenuSide domain="https://app.dev.d1.cx" />
+  return (
+    <>
+      <MenuSide domain="https://app.dev.d1.cx" />
 
-			<ContainerStyled>
-				<Menu />
-				<Graphs />
-				<CustomerList />
-			</ContainerStyled>
-		</>
-	);
+      <ContainerStyled>
+        <Menu />
+        <Filters />
+        <Graphs />
+        <CustomerList />
+      </ContainerStyled>
+    </>
+  );
 };
