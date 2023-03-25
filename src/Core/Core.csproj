@@ -7,9 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="interfaces\factories\" />
-    <Folder Include="models\" />
-    <Folder Include="services\" />
+    <Folder Include="models\Responses\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OpenAI" Version="1.6.0" />
   </ItemGroup>
 
 </Project>
