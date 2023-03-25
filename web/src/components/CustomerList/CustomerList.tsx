@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   MOCK_TABLE,
@@ -13,6 +13,15 @@ import {
   WrapperTableAreaStyled,
 } from './styled';
 
+type Customers = {
+  name: string;
+  historic: Array<string>;
+  contractTime: string;
+  date: string;
+  status: string;
+  sentiment: string;
+};
+
 /**
  * @export
  * @component
@@ -22,6 +31,7 @@ import {
  * Responsável por a área de listas de cancelamentos.
  */
 export const CustomerList = (): JSX.Element => {
+  const [listTable, setListTable] = useState<Array<Customers>>(MOCK_TABLE);
   const verifiedCustomertatus = (status: string) => {
     if (status === STATUS_CANCELED) {
       return (
@@ -52,6 +62,13 @@ export const CustomerList = (): JSX.Element => {
       </span>
     );
   };
+
+  const handleSearchCustomers = (contentInput: string) => {
+    const filterTable = MOCK_TABLE.filter((item) =>
+      item.name.toLowerCase().includes(contentInput.toLowerCase())
+    );
+    setListTable(filterTable);
+  };
   return (
     <WrapperTableAreaStyled>
       <MenuSideStyled>Cancelamentos</MenuSideStyled>
@@ -61,6 +78,7 @@ export const CustomerList = (): JSX.Element => {
           className="has-shadow-level-1 "
           type="text"
           placeholder="Buscar clientes"
+          onChange={(event) => handleSearchCustomers(event.target.value)}
         />
       </ContentSearchStyled>
 
@@ -75,7 +93,7 @@ export const CustomerList = (): JSX.Element => {
           </tr>
         </thead>
         <tbody>
-          {MOCK_TABLE.map((customer) => (
+          {listTable.map((customer) => (
             <tr>
               <td>{customer.name}</td>
 
