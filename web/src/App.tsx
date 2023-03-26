@@ -1,7 +1,9 @@
 import Welcome from './components/Welcome';
 
+import './global.css';
+
 function App() {
-	return <Welcome />;
+  return <Welcome />;
 }
 
 export default App;
