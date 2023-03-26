@@ -1,6 +1,5 @@
 import { MultiSelect } from 'react-multi-select-component';
 import styled from 'styled-components';
-import { IconSearch } from './iconSearch';
 
 export const WrapperTableAreaStyled = styled.div`
 	margin: 2rem 6rem 6rem;
@@ -80,3 +79,14 @@ export const ContentStatusStyled = styled.div`
     padding-left: 1rem;
   }
 `;
+
+export const ButtonStyled = styled.button`
+	border: 0;
+	cursor: pointer;
+	background: transparent;
+	padding: 8px;
+
+	&:hover {
+		color: #5a4cfb;
+	}
+`

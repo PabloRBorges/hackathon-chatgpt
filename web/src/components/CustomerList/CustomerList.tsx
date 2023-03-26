@@ -9,6 +9,7 @@ import {
 } from '@src/configuration/contants/constants';
 
 import debouncedSave from '@src/utils/deboucedSave';
+import { useUserData } from '@src/Providers/UserData/useUserData';
 import {
 	ButtonStyled,
 	ContentSearchStyled,
@@ -20,7 +21,7 @@ import {
 import { LoadingTable } from './LoadingTable/LoadingTable';
 import EmptyMessage from '../EmptyMessage';
 import { Customersearch } from './CustomerSearch';
-import { useUserData } from '@src/Providers/UserData/useUserData'
+
 type Customers = {
 	name: string;
 	historic: Array<string>;
@@ -101,7 +102,6 @@ export const CustomerList = (): JSX.Element => {
 		handleSwitchModal();
 	};
 
-
 	const mockLoading = [1, 2, 3, 4, 5];
 	const [selected, setSelected] = useState([]);
 
@@ -148,18 +148,20 @@ export const CustomerList = (): JSX.Element => {
 						listTable.length > EMPTY &&
 						listTable.map((customer) => (
 							<tr key={Math.random()}>
-								<td><ButtonStyled
-									type="button"
-									onClick={() => {
-										handleViewFullDataUser(
-											customer.name,
-											customer.status,
-											customer.sentiment
-										);
-									}}
-								>
-									{customer.name}
-								</ButtonStyled></td>
+								<td>
+									<ButtonStyled
+										type="button"
+										onClick={() => {
+											handleViewFullDataUser(
+												customer.name,
+												customer.status,
+												customer.sentiment
+											);
+										}}
+									>
+										{customer.name}
+									</ButtonStyled>
+								</td>
 
 								<td>
 									Histórico de motivos{' '}

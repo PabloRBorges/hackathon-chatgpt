@@ -1,5 +1,7 @@
 import { useUserData } from '@src/Providers/UserData/useUserData';
+import { useEffect } from 'react';
 import GeneralData from './components/GeneralData';
+import LineGraph from './components/LineGraph';
 import { ContainerStyled } from './styled';
 
 export const ModalUser = () => {
@@ -10,6 +12,15 @@ export const ModalUser = () => {
 
 		handleSwitchModal();
 	};
+
+	const getHistoric = async () => {
+		// get historic about feeling
+	};
+
+	useEffect(() => {
+		getHistoric()
+	}, [])
+
 	return (
 		<ContainerStyled className="modal is-text" role="dialog">
 			<div className="modal-background" />
@@ -28,6 +39,8 @@ export const ModalUser = () => {
 						status={user?.status ?? ''}
 						feeling={user?.sentiment ?? ''}
 					/>
+
+					<LineGraph />
 				</section>
 				<footer className="modal-card-foot is-centered">
 					<button className="button is-primary" onClick={handleCloseModal}>
