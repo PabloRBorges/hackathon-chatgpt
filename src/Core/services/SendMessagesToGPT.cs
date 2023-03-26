@@ -1,4 +1,5 @@
 ﻿using Core.builder;
+using Core.interfaces;
 using Core.interfaces.Repositories;
 using Core.interfaces.Services;
 using Core.models.Repositories;
@@ -8,10 +9,10 @@ namespace Core.services
 {
     public class SendMessagesToGPT : ISendMessagesToGPT
     {
-        private readonly IChatGPT _chatGPT;
+        private readonly IChatGPTServices _chatGPT;
         private readonly IChatGPTRepository _chatGPTRepository;
 
-        public SendMessagesToGPT(IChatGPT chatGPT, IChatGPTRepository chatGPTRepository)
+        public SendMessagesToGPT(IChatGPTServices chatGPT, IChatGPTRepository chatGPTRepository)
         {
             _chatGPT = chatGPT;
             _chatGPTRepository = chatGPTRepository;

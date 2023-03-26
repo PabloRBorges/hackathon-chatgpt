@@ -1,5 +1,8 @@
-﻿using Core.interfaces.Services;
+﻿using Core.interfaces;
+using Core.interfaces.Services;
 using Core.models;
+using Core.models.Requests;
+using Core.services;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -9,11 +12,12 @@ namespace Api.ChatGPT.Controllers
     [ApiController]
     public class ChatGPTController : ControllerBase
     {
-        private readonly IChatGPT _chatGPT;
+        private readonly IChatGPTServices _chatGPT;
+        private readonly ISendMessagesToGPT _sendMessagesToGPT;
 
-        public ChatGPTController(IChatGPT chatGPT)
+        public ChatGPTController(ISendMessagesToGPT sendMessagesToGPT)
         {
-            _chatGPT = chatGPT;
+            _sendMessagesToGPT = sendMessagesToGPT;
         }
 
         // GET: api/<ChatGPTController>
@@ -34,9 +38,9 @@ namespace Api.ChatGPT.Controllers
 
         // POST api/<ChatGPTController>
         [HttpPost]
-        public async Task<string> Post([FromBody] PromptFormat value)
+        public async Task<ChatGptResponse> Post([FromBody] ChatRequest value)
         {
-            var result = await _chatGPT.SendMessageAsync(value);
+            var result = _sendMessagesToGPT.FellAnalisesGPTAsync(value);
 
             return result;
         }
