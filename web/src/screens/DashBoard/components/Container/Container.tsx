@@ -16,9 +16,9 @@ export const Container = () => {
 			{modalIsOpen && <ModalUser />}
 
 			<MenuSide domain="https://app.dev.d1.cx" />
+			<Menu />
 
 			<ContainerStyled>
-				<Menu />
 				<Filters />
 				<Graphs />
 				<CustomerList />
