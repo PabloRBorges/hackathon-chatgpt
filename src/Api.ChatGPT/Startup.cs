@@ -36,7 +36,8 @@ namespace ProjectChapGPT.API.Api
 
             services
                 .AddSingleton<IChatGPTRepository, ChatGPTRepository>()
-                .AddSingleton<IChatGPTHistoryRepository, ChatGPTHistoryRepository>();
+                .AddSingleton<IChatGPTHistoryRepository, ChatGPTHistoryRepository>()
+                .AddSingleton<IHistoryFeelsChatRepository, HistoryFeelsChatRepository>();
 
 
 
