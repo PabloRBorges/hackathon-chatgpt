@@ -52,3 +52,5 @@ export const MOCK_TABLE = [
     sentiment: 'Insatisfeito',
   },
 ];
+
+export const EMPTY = 0;

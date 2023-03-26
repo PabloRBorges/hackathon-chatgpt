@@ -1,5 +1,7 @@
 import { useUserData } from '@src/stores/useUserData';
+
 import CustomerList from '../CustomerList';
+// import CustomerProfile from '../CustomerProfile';
 import Filters from '../Filters';
 import Graphs from '../Graphs';
 
@@ -28,6 +30,7 @@ export const Welcome = () => {
         <Filters />
         <Graphs />
         <CustomerList />
+        {/* <CustomerProfile /> */}
       </ContainerStyled>
     </>
   );

@@ -1,4 +1,6 @@
+import { MultiSelect } from 'react-multi-select-component';
 import styled from 'styled-components';
+import { IconSearch } from './iconSearch';
 
 export const WrapperTableAreaStyled = styled.div`
   margin: 2rem 6rem 6rem;
@@ -18,12 +20,12 @@ export const InputStyled = styled.input`
   box-shadow: 1px;
   margin-bottom: 2rem;
   margin-top: 0.25rem;
+  padding-left: 1rem;
 
   ::placeholder {
     font-weight: 400;
     opacity: 0.7;
     color: #b6b6b6;
-    padding-left: 1rem;
   }
 
   :focus {
@@ -34,30 +36,13 @@ export const InputStyled = styled.input`
       padding-left: 2px;
     }
   }
+`;
 
-  & .ico-mglass {
-    position: relative;
-    display: inline-block;
-    background: #fff;
-    border-radius: 30px;
-    height: 6px;
-    width: 6px;
-    border: 2px solid #888;
-
-    &:after {
-      content: '';
-      height: 2px;
-      width: 6px;
-      background: #888;
-      position: absolute;
-      top: 7px;
-      left: 5px;
-      -webkit-transform: rotate(45deg);
-      -moz-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);
-      -o-transform: rotate(45deg);
-    }
-  }
+export const IconSearchStyled = styled.div`
+  width: 0.75rem;
+  position: absolute;
+  margin-top: 2rem;
+  left: 370px;
 `;
 
 export const ContentSearchStyled = styled.div`
@@ -65,8 +50,32 @@ export const ContentSearchStyled = styled.div`
   color: #888;
   display: flex;
   flex-direction: column;
+  width: 300px;
+
   &&& {
     margin: 0;
     padding: 0;
+  }
+`;
+
+export const MultiSelectStyled = styled(MultiSelect)`
+  border: none;
+  outline: none;
+  box-shadow: 0;
+  &&& {
+    width: 300px;
+    height: 40px;
+  }
+`;
+
+export const ContentStatusStyled = styled.div`
+  &&& {
+    border-radius: 50px;
+    margin-bottom: 0;
+    font-size: 0.75rem;
+    color: #888;
+    display: flex;
+    flex-direction: column;
+    padding-left: 1rem;
   }
 `;

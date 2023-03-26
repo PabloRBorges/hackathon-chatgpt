@@ -3,6 +3,7 @@ import {
   STATUS_CANCELED,
   STATUS_CANCELLING,
   STATUS_NOT_CANCELLING,
+  EMPTY,
 } from './constants';
 
 export default {
@@ -10,4 +11,5 @@ export default {
   STATUS_CANCELED,
   STATUS_CANCELLING,
   STATUS_NOT_CANCELLING,
+  EMPTY,
 };
