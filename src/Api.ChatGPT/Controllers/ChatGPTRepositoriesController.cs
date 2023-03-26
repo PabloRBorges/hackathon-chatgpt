@@ -22,7 +22,7 @@ namespace Api.ChatGPT.Controllers
         }
 
         [HttpGet]
-        public async Task<List<ClientsModel>> GetListClients()
+        public async Task<ICollection<ClientsModel>> GetListClients()
         {
             return await _chatGPTReposity.GetListClientsAsync();
         }

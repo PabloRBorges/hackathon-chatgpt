@@ -11,7 +11,10 @@ import {
 import debouncedSave from '@src/utils/deboucedSave';
 import { useUserData } from '@src/Providers/UserData/useUserData';
 import {
+<<<<<<< Updated upstream
 	ButtonStyled,
+=======
+>>>>>>> Stashed changes
 	ContentSearchStyled,
 	IconSearchStyled,
 	InputStyled,
@@ -21,6 +24,12 @@ import {
 import { LoadingTable } from './LoadingTable/LoadingTable';
 import EmptyMessage from '../EmptyMessage';
 import { Customersearch } from './CustomerSearch';
+import { usePagination } from '../Pagination/usePagination';
+
+type Status = {
+	label: string;
+	value: number;
+};
 
 type Customers = {
 	name: string;
@@ -40,9 +49,25 @@ type Customers = {
  * Responsável por a área de listas de cancelamentos.
  */
 export const CustomerList = (): JSX.Element => {
+<<<<<<< Updated upstream
 	const { handleSwitchModal, handleChangeUserData } = useUserData();
 	const [listTable, setListTable] = useState<Array<Customers>>(MOCK_TABLE);
 	const [isLoading, setIsLoading] = useState(false);
+=======
+	const [listTable, setListTable] = useState<Array<Customers>>(MOCK_TABLE);
+	const [isLoading, setIsLoading] = useState(false);
+	const [selected, setSelected] = useState<Array<Status>>([]);
+	const [query, setQuery] = useState('');
+	const [pageNumber, setPageNumber] = useState(1);
+
+	const handlePagination = (e) => {
+		setQuery(e.target.value);
+		setPageNumber(1);
+	};
+
+	usePagination(query, pageNumber);
+
+>>>>>>> Stashed changes
 	const verifiedCustomertatus = (status: string) => {
 		if (status === STATUS_CANCELED) {
 			return (
@@ -81,11 +106,14 @@ export const CustomerList = (): JSX.Element => {
 			item.name.toLowerCase().includes(contentInput.toLowerCase())
 		);
 
+<<<<<<< Updated upstream
 		const filterStatusTable = MOCK_TABLE.filter((item) =>
 			[selected].includes(item.status)
 		);
 
 		console.log(filterStatusTable);
+=======
+>>>>>>> Stashed changes
 		debouncedSave({
 			filterValue: filterTable,
 			setValue: setListTable,
@@ -93,6 +121,7 @@ export const CustomerList = (): JSX.Element => {
 		});
 	};
 
+<<<<<<< Updated upstream
 	const handleViewFullDataUser = (
 		name: string,
 		status: string,
@@ -104,6 +133,9 @@ export const CustomerList = (): JSX.Element => {
 
 	const mockLoading = [1, 2, 3, 4, 5];
 	const [selected, setSelected] = useState([]);
+=======
+	const mockLoading = [1, 2, 3, 4, 5];
+>>>>>>> Stashed changes
 
 	const data = [
 		{
@@ -148,6 +180,7 @@ export const CustomerList = (): JSX.Element => {
 						listTable.length > EMPTY &&
 						listTable.map((customer) => (
 							<tr key={Math.random()}>
+<<<<<<< Updated upstream
 								<td>
 									<ButtonStyled
 										type="button"
@@ -162,6 +195,9 @@ export const CustomerList = (): JSX.Element => {
 										{customer.name}
 									</ButtonStyled>
 								</td>
+=======
+								<td>{customer.name}</td>
+>>>>>>> Stashed changes
 
 								<td>
 									Histórico de motivos{' '}
