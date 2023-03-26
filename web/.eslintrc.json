@@ -56,6 +56,11 @@
 				"ts": "never",
 				"tsx": "never"
 			}
-		]
+		],
+		"jsx-a11y/control-has-associated-label": "warn",
+		"react/button-has-type": "off",
+		"jsx-a11y/anchor-is-valid": "warn",
+		"react/jsx-no-constructed-context-values": "off",
+		"import/no-extraneous-dependencies": "off"
 	}
 }

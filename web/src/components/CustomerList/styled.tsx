@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import { IconSearch } from './iconSearch';
 
 export const WrapperTableAreaStyled = styled.div`
-  margin: 2rem 6rem 6rem;
+	margin: 2rem 6rem 6rem;
 `;
 
-export const MenuSideStyled = styled.div`
-  text-align: center;
-  border-top: 1px solid #d9d9d9;
-  padding-top: 2rem;
+export const MenuSideStyled = styled.h3`
+	font-size: 24px;
+	text-align: center;
+	border-top: 1px solid #d9d9d9;
+	padding-top: 2rem;
 `;
 
 export const InputStyled = styled.input`
@@ -28,9 +29,9 @@ export const InputStyled = styled.input`
     color: #b6b6b6;
   }
 
-  :focus {
-    outline: none;
-    padding-left: 1rem;
+	:focus {
+		outline: none;
+		padding-left: 1rem;
 
     ::placeholder {
       padding-left: 2px;

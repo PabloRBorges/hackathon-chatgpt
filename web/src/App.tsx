@@ -1,9 +1,9 @@
-import Welcome from './components/Welcome';
+import DashBoard from './screens/DashBoard';
 
 import './global.css';
 
 function App() {
-  return <Welcome />;
+  return <DashBoard />;
 }
 
 export default App;
