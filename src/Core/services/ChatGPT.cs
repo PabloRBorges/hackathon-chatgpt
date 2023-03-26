@@ -31,12 +31,10 @@ namespace Core.services
                 Model = "curie:ft-casa-2023-03-26-06-35-39",
                 Temperature = 0,
                 MaxTokens = 1,
-                Messages = new prom ChatMessage[] {
+                Messages = new  ChatMessage[] {
             new ChatMessage(ChatMessageRole.User, messageserialize)}});
                         
             var results= await _openAIAPI.Chat.CreateChatCompletionAsync(JsonConvert.SerializeObject(message));
-
-
 
 
             var reply = results.Choices[0].Message;

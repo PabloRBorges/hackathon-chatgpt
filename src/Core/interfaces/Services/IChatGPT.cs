@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Core.interfaces.Services
 {
     public interface IChatGPT
     {
-        Task<string> SendMessageAsync(string message);
+        Task<string> SendMessageAsync(PromptFormat message);
     }
 }
