@@ -1,5 +1,7 @@
 ﻿using Core.interfaces.Repositories;
+using Core.interfaces.Services;
 using Core.models.Repositories;
+using Core.models.Requests;
 using Infrastructure.Repositories.MongoDb;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,9 +13,12 @@ namespace Api.ChatGPT.Controllers
     public class ChatGPTRepositoriesController : ControllerBase
     {
         private readonly IChatGPTRepository _chatGPTReposity;
-        public ChatGPTRepositoriesController(IChatGPTRepository chatGPTRepository)
+        private readonly ISendMessagesToGPT _sendMessagesToGPT;
+
+        public ChatGPTRepositoriesController(IChatGPTRepository chatGPTRepository, ISendMessagesToGPT sendMessagesToGPT)
         {
             _chatGPTReposity = chatGPTRepository;
+            _sendMessagesToGPT = sendMessagesToGPT;
         }
 
         [HttpGet]
@@ -29,11 +34,12 @@ namespace Api.ChatGPT.Controllers
         }
 
         [HttpPost]
-        public async Task<ClientsModel> PostClients([FromBody] ClientsModel clients)
+        public async Task PostClients([FromBody] ChatRequest clients)
         {
-            await _chatGPTReposity.CreateAsync(clients);
+            // await _chatGPTReposity.CreateAsync(clients);
 
-            return clients;
+            await _sendMessagesToGPT.FellAnalisesGPTAsync(clients);
+            
         }
 
         [HttpPut("{name}")]
