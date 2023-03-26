@@ -1,7 +1,7 @@
-import Welcome from './components/Welcome';
+import DashBoard from './screens/DashBoard';
 
 function App() {
-	return <Welcome />;
+	return <DashBoard />;
 }
 
 export default App;
