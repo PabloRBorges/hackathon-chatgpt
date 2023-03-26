@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.interfaces
+namespace Core.interfaces.Repositories
 {
-    public interface IChatGPT
+    public interface IChatGPTRepository
     {
-        Task<string> SendMessageAsync(string message);
     }
 }
