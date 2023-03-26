@@ -1,4 +1,5 @@
 ﻿using Core.interfaces;
+using Core.interfaces.Services;
 using OpenAI_API;
 using OpenAI_API.Chat;
 using OpenAI_API.Models;
