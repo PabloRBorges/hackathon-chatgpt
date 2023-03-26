@@ -22,7 +22,7 @@ type PropsDougnhutGraph = {
  */
 export const Graphs = () => {
 	const NUMBER_CFG = [100, 200, 125, 175];
-	const colors = ['Red', 'Orange', 'Yellow', 'Blue'];
+	const colors = ['#59101D', '#921A30', '#D92748', '#BF223F'];
 	const labels = [
 		'Financeiro',
 		'Suporte ruim',
@@ -35,7 +35,7 @@ export const Graphs = () => {
 		'Cliente Neutro',
 		'Cliente Insatisfeito',
 	];
-	const colors2 = ['#009900', '#f2b157', '#a93639'];
+	const colors2 = ['#1A8226', '#BF7118', '#921A30'];
 	const numbers2 = [60, 30, 10];
 	const [newOrderData, setNewOrderData] = useState<PropsDougnhutGraph>({
 		labelsI: labels,
@@ -50,7 +50,7 @@ export const Graphs = () => {
 				labels: newOrderData.colorsI,
 				data: newOrderData.datasI,
 				backgroundColor: newOrderData.colorsI,
-				hoverOffset: 4,
+				hoverOffset: 1,
 			},
 		],
 	};
@@ -69,7 +69,7 @@ export const Graphs = () => {
 				title: {
 					display: true,
 					text: 'Todos os envios',
-					color: '#393946',
+					color: '#000000',
 					font: {
 						size: 16,
 					},

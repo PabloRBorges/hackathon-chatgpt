@@ -1,7 +1,9 @@
 import DashBoard from './screens/DashBoard';
 
+import './global.css';
+
 function App() {
-	return <DashBoard />;
+  return <DashBoard />;
 }
 
 export default App;

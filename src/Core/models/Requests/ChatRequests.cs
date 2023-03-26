@@ -8,9 +8,9 @@ namespace Core.models.Requests
 {
     public class ChatRequests
     {
-        public string TenantId { get; set; }
+        public string? TenantId { get; set; }
         public string? TenantName { get; set; }
 
-        public object body { get; set; }
+        public object? body { get; set; }
     }
 }

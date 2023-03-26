@@ -1,6 +1,9 @@
-﻿using Core.interfaces.Services;
+﻿using Core.interfaces.Repositories;
+using Core.interfaces.Services;
 using Core.services;
+using Infrastructure.Repositories.MongoDb;
 using Microsoft.OpenApi.Models;
+using System;
 
 namespace ProjectChapGPT.API.Api
 {
@@ -21,6 +24,16 @@ namespace ProjectChapGPT.API.Api
 
             services
                 .AddScoped<IChatGPT, ChatGPT>();
+
+            services.Configure<ModelSettings>(options =>
+            {
+                options.ConnectionString = Configuration.GetSection("CONNECTION_STRING_MONGODB").Value;
+                options.DatabaseName = Configuration.GetSection("NOME_DO_BANCO").Value;
+                options.CollectionName = Configuration.GetSection("COLLECTION_NAME").Value;
+            });
+
+            services
+                .AddSingleton<IChatGPTRepository, ChatGPTRepository>();
 
             services.AddCors(options =>
             {
