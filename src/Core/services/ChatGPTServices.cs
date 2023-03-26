@@ -6,6 +6,7 @@ using Core.interfaces.Services;
 using Core.models.Repositories;
 using Core.models.Requests;
 using Core.models.Responses;
+using System.Diagnostics.Contracts;
 
 namespace Core.services
 {
@@ -13,11 +14,13 @@ namespace Core.services
     {
         private readonly IChatGPTAdapter _chatGPT;
         private readonly IChatGPTRepository _chatGPTRepository;
+        private readonly IChatGPTHistoryRepository _chatGPTHistoryRepository;
 
-        public ChatGPTServices(IChatGPTAdapter chatGPT, IChatGPTRepository chatGPTRepository)
+        public ChatGPTServices(IChatGPTAdapter chatGPT, IChatGPTRepository chatGPTRepository, IChatGPTHistoryRepository chatGPTHistoryRepository)
         {
             _chatGPT = chatGPT;
             _chatGPTRepository = chatGPTRepository;
+            _chatGPTHistoryRepository = chatGPTHistoryRepository;
         }
 
         public async Task ChatAnalisesGPTAsync(ChatRequest chatRequest)
@@ -55,7 +58,7 @@ namespace Core.services
             await _chatGPTRepository.UpdateAsync(clientmodel.Nome, clientmodel);
         }
 
-        public async Task<List<ClientResponse>> GetAllClientsWithFeel()
+        public async Task<ICollection<ClientResponse>> GetAllClientsWithFeel()
         {
             var clientList = await _chatGPTRepository.GetListClientsAsync();
 
@@ -83,6 +86,15 @@ namespace Core.services
             }
 
             return result;
+        }
+
+        public async Task<ICollection<HistoricFeelResponse>> HistoricFeelResponse(string clientId)
+        {
+            //TODO: Listar os históricos dos clientes
+
+            var responseList = new List<HistoricFeelResponse>();
+
+            return responseList;
         }
     }
 }

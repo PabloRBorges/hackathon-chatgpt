@@ -31,7 +31,8 @@ namespace ProjectChapGPT.API.Api
 
             services
                 .AddScoped<IChatGPTServices, ChatGPTServices>()
-                .AddTransient<ISendMessagesToGPT, SendMessagesToGPT>();
+                .AddTransient<IChatGPTServices, ChatGPTServices>()
+                .AddTransient<I>();
 
             services
                 .AddSingleton<IChatGPTRepository, ChatGPTRepository>()

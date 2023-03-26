@@ -13,5 +13,6 @@ namespace Core.interfaces.Services
         Task FellAnalisesGPTAsync(ChatRequest chatRequest);
         Task ChatAnalisesGPTAsync(ChatRequest chatRequest);
         Task<ICollection<ClientResponse>> GetAllClientsWithFeel();
+        Task<ICollection<HistoricFeelResponse>> HistoricFeelResponse(string clientId);
     }
 }
