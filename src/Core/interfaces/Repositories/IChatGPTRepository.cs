@@ -1,13 +1,15 @@
-﻿using Core.models.Repositories;
+﻿
+
+using Core.models.Repositories;
 
 namespace Core.interfaces.Repositories
 {
     public interface IChatGPTRepository
     {
-        Task<List<Clients>> GetListClientsAsync();
-        Task<Clients> GetClientAsync(string nome);
-        Task CreateAsync(Clients client);
-        Task UpdateAsync(string nome, Clients client);
+        Task<List<ClientsModel>> GetListClientsAsync();
+        Task<ClientsModel> GetClientAsync(string nome);
+        Task CreateAsync(ClientsModel client);
+        Task UpdateAsync(string nome, ClientsModel client);
         Task RemoveAsync(string nome);
     }
 }

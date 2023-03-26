@@ -22,9 +22,6 @@ namespace ProjectChapGPT.API.Api
         {
             services.AddControllers();
 
-            services
-                .AddScoped<IChatGPT, ChatGPT>();
-
             services.Configure<ModelSettings>(options =>
             {
                 options.ConnectionString = Configuration.GetSection("CONNECTION_STRING_MONGODB").Value;
@@ -33,7 +30,12 @@ namespace ProjectChapGPT.API.Api
             });
 
             services
+                .AddScoped<IChatGPT, ChatGPT>()
+                .AddTransient<ISendMessagesToGPT, SendMessagesToGPT>();
+
+            services
                 .AddSingleton<IChatGPTRepository, ChatGPTRepository>();
+
 
             services.AddCors(options =>
             {

@@ -1,7 +1,7 @@
 ﻿using Core.interfaces.Services;
+using Core.models;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Api.ChatGPT.Controllers
 {
@@ -34,7 +34,7 @@ namespace Api.ChatGPT.Controllers
 
         // POST api/<ChatGPTController>
         [HttpPost]
-        public async Task<string> Post([FromBody] string value)
+        public async Task<string> Post([FromBody] PromptFormat value)
         {
             var result = await _chatGPT.SendMessageAsync(value);
 
