@@ -1,13 +1,7 @@
 ﻿using Core.interfaces.Repositories;
 using Core.models.Repositories;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories.MongoDb
 {
@@ -46,7 +40,7 @@ namespace Infrastructure.Repositories.MongoDb
 
         public async Task RemoveAsync(string nome)
         {
-            await _ClientsCollection.DeleteOneAsync(x =>x.Nome == nome);
+            await _ClientsCollection.DeleteOneAsync(x => x.Nome == nome);
         }
     }
 }
