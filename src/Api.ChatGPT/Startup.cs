@@ -1,4 +1,6 @@
-﻿using Core.interfaces.Repositories;
+﻿using Core.Adapter;
+using Core.interfaces.Adapter;
+using Core.interfaces.Repositories;
 using Core.interfaces.Services;
 using Core.services;
 using Infrastructure.Repositories.MongoDb;
@@ -31,8 +33,9 @@ namespace ProjectChapGPT.API.Api
 
             services
                 .AddScoped<IChatGPTServices, ChatGPTServices>()
-                .AddTransient<IChatGPTServices, ChatGPTServices>()
-                .AddTransient<I>();
+                .AddSingleton<IChatGPTAdapter, ChatGPTAdapter>();
+                
+       
 
             services
                 .AddSingleton<IChatGPTRepository, ChatGPTRepository>()

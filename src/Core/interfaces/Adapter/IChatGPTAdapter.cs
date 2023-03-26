@@ -9,6 +9,8 @@ namespace Core.interfaces.Adapter
 {
     public interface IChatGPTAdapter
     {
-        Task<string> SendMessageAsync(string message);
+        Task<string> VerifyFeelClientAsync(string message);
+
+        Task<string> VerifyChatMessages(string message);
     }
 }

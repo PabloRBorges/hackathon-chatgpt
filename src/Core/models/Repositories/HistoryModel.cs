@@ -6,10 +6,10 @@ namespace Core.models.Repositories
     public class HistoryModel
     {
         [BsonElement("ClientId")]
-        public string? ClientId { get; set; }
+        public string ClientId { get; set; }
         [BsonElement("Date")]
         public DateTime Date { get; set; }
         [BsonElement("Sentimento")]
-        public string? Sentimento { get; set; }
+        public string Feel { get; set; }
     }
 }

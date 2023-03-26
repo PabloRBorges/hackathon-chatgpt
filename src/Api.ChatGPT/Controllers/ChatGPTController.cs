@@ -20,27 +20,34 @@ namespace Api.ChatGPT.Controllers
             _chatGPTServices = sendMessagesToGPT;
         }
 
+        //Get All Clients with feels
         [HttpGet]
         public async Task<ICollection<ClientResponse>> GetListClients()
         {
             var result = await _chatGPTServices.GetAllClientsWithFeel();
             return result;
         }
-
+        //Get all feels by client
+        
+        //Get all feel by client
         [HttpGet("{clientId}")]
-        public async Task<ICollection<HistoricFeelResponse>> GetHistoricByClientId([FromRoute] string clientId)
+        public async Task<ICollection<HistoryFeelsResponse>> GetHistoricByClientId([FromRoute] string clientId)
         {
             if (clientId == null)
                 return null;
 
-            var result = await _chatGPTServices.HistoricFeelResponse(clientId);
+            var result = await _chatGPTServices.GetHistoricFeelResponse(clientId);
             return result;
         }
 
+        //Post data Clients
         [HttpPost]
-        public async Task Post([FromBody] ChatRequest clients)
+        public async Task PostDataClient([FromBody] ChatRequest clients)
         {
-            await _chatGPTServices.ChatAnalisesGPTAsync(clients);
+            await _chatGPTServices.CreateChatAnalisesGPTAsync(clients);
         }
+
+    
+    
     }
 }

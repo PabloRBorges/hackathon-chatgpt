@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.models.Responses
 {
-    public class HistoricFeelResponse
+    public class HistoryFeelsResponse
     {
         public string ClientId { get; set; }
         public DateTime Data { get; set; }

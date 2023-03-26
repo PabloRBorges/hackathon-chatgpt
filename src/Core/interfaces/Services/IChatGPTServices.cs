@@ -11,8 +11,11 @@ namespace Core.interfaces.Services
     public interface IChatGPTServices
     {
         Task FellAnalisesGPTAsync(ChatRequest chatRequest);
-        Task ChatAnalisesGPTAsync(ChatRequest chatRequest);
+        Task CreateChatAnalisesGPTAsync(ChatRequest chatRequest);
         Task<ICollection<ClientResponse>> GetAllClientsWithFeel();
-        Task<ICollection<HistoricFeelResponse>> HistoricFeelResponse(string clientId);
+        Task<ICollection<HistoryFeelsResponse>> GetHistoricFeelResponse(string clientId);
+        Task CreateChatMessages(string messages, string clientId);
+        Task<ICollection<HistoryChatMessagesResponse>> GetAllMotivations();
+        
     }
 }

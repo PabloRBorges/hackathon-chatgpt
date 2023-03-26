@@ -43,6 +43,6 @@ namespace Core.models.Responses
         public string SetorDeCancelamento { get; set; }
 
         [JsonProperty("HistoricFeel", NullValueHandling = NullValueHandling.Ignore)]
-        public List<HistoricFeelResponse> HistoricFeel { get; set; }
+        public string HistoricFeel { get; set; }
     }
 }

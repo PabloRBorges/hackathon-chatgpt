@@ -9,7 +9,7 @@ namespace Core.models.Repositories
         public string? ClientId { get; set; }
         [BsonElement("Text")]
         public string? Text { get; set; }
-        [BsonElement("Sentimento")]
-        public string? Sentimento { get; set; }
+        [BsonElement("Motivo")]
+        public string? Motivo { get; set; }
     }
 }

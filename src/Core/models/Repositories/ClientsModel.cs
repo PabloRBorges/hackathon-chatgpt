@@ -8,7 +8,7 @@ namespace Core.models.Repositories
     public class ClientsModel
     {
         [BsonElement("ClientId")]
-        public string? ClientId { get; set; }
+        public string ClientId { get; set; }
         [BsonElement("nome")]
         public string? Nome { get; set; }
         [BsonElement("Idade")]

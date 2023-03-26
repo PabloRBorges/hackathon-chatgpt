@@ -15,18 +15,35 @@ namespace Core.services
         private readonly IChatGPTAdapter _chatGPT;
         private readonly IChatGPTRepository _chatGPTRepository;
         private readonly IChatGPTHistoryRepository _chatGPTHistoryRepository;
+        private readonly IHistoryFeelsChatRepository _historyFeelsChatRepository;
 
-        public ChatGPTServices(IChatGPTAdapter chatGPT, IChatGPTRepository chatGPTRepository, IChatGPTHistoryRepository chatGPTHistoryRepository)
+
+        public ChatGPTServices(IChatGPTAdapter chatGPT, IChatGPTRepository chatGPTRepository, IChatGPTHistoryRepository chatGPTHistoryRepository, IHistoryFeelsChatRepository historyFeelsChatRepository)
         {
             _chatGPT = chatGPT;
             _chatGPTRepository = chatGPTRepository;
             _chatGPTHistoryRepository = chatGPTHistoryRepository;
+            _historyFeelsChatRepository = historyFeelsChatRepository;
         }
 
-        public async Task ChatAnalisesGPTAsync(ChatRequest chatRequest)
-        {
 
+        public Task CreateChatAnalisesGPTAsync(ChatRequest chatRequest)
+        {
             throw new NotImplementedException();
+        }
+
+        public async Task CreateChatMessages(string messages, string clientId)
+        {
+            var result = await _chatGPT.VerifyChatMessages(messages);
+
+            var createChat = new HistoryFeelsChatModel()
+            {
+                ClientId = clientId,
+                Text = messages,
+                Motivo = result
+            };
+
+            await _historyFeelsChatRepository.CreateAsync(createChat);
         }
 
         public async Task FellAnalisesGPTAsync(ChatRequest chatRequest)
@@ -53,7 +70,7 @@ namespace Core.services
             var builder = new MakeMessages();
             var messageGpt = builder.CreateMessageToFels(chatRequest);
 
-            var fell = await _chatGPT.SendMessageAsync(messageGpt);
+            var fell = await _chatGPT.VerifyFeelClientAsync(messageGpt);
 
             await _chatGPTRepository.UpdateAsync(clientmodel.Nome, clientmodel);
         }
@@ -61,11 +78,12 @@ namespace Core.services
         public async Task<ICollection<ClientResponse>> GetAllClientsWithFeel()
         {
             var clientList = await _chatGPTRepository.GetListClientsAsync();
-
-            //TODO: CONSULTA A LISTA DE HISTÓRICO E SALVA NO CLIENTE REPONSE
             var result = new List<ClientResponse>();
+
             foreach (var item in clientList)
             {
+                var feel = await _chatGPTHistoryRepository.GetHistoricAsync(item.ClientId);
+
                 var itemList = new ClientResponse()
                 {
                     ClientId = item.ClientId,
@@ -78,8 +96,8 @@ namespace Core.services
                     Sexo = item.Sexo,
                     TempoContrato = item.TempoContrato,
                     TempodaPrimeiraMensagem = item.TempodaPrimeiraMensagem,
-                    UsoDeDisparo = item.UsoDeDisparo
-                    //HistoricFeel = item.HistoricFeel, - Busca pelo cliente na lista de histórico
+                    UsoDeDisparo = item.UsoDeDisparo,
+                    HistoricFeel = feel.Where(x => x.Date.Month == DateTime.Now.Month).FirstOrDefault().Feel
                 };
 
                 result.Add(itemList);
@@ -88,11 +106,41 @@ namespace Core.services
             return result;
         }
 
-        public async Task<ICollection<HistoricFeelResponse>> HistoricFeelResponse(string clientId)
+        public async Task<ICollection<HistoryChatMessagesResponse>> GetAllMotivations()
         {
-            //TODO: Listar os históricos dos clientes
+            var result = await _historyFeelsChatRepository.GetListHistoricAsync();
 
-            var responseList = new List<HistoricFeelResponse>();
+            var response = new List<HistoryChatMessagesResponse>();
+
+            foreach (var item in result)
+            {
+                var itemlist = new HistoryChatMessagesResponse()
+                {
+                    ClientId = item.ClientId,
+                    Motivo = item.Motivo,
+                    Text = item.Text
+                };
+                response.Add(itemlist);
+            }
+            return response;
+        }
+
+        public async Task<ICollection<HistoryFeelsResponse>> GetHistoricFeelResponse(string clientId)
+        {
+            var historicList = await _chatGPTHistoryRepository.GetHistoricAsync(clientId);
+            var responseList = new List<HistoryFeelsResponse>();
+
+            foreach (var item in historicList)
+            {
+                var itemList = new HistoryFeelsResponse()
+                {
+                    ClientId = item.ClientId,
+                    Data = item.Date,
+                    Feel = item.Feel
+                };
+
+                responseList.Add(itemList);
+            }
 
             return responseList;
         }
