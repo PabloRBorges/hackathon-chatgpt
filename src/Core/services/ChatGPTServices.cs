@@ -1,4 +1,4 @@
-﻿using Core.interfaces;
+﻿using Core.interfaces.Services;
 using Core.models;
 using Newtonsoft.Json;
 using OpenAI_API;
@@ -14,7 +14,7 @@ namespace Core.services
         private readonly OpenAIAPI _openAIAPI;
         private readonly string PRIVATE_KEY_CHATGPT = "private_key_chat";
 
-        public ChatGPT()
+        public ChatGPTServices()
         {
             _openAIAPI = new OpenAIAPI(Environment.GetEnvironmentVariable(PRIVATE_KEY_CHATGPT));
         }
