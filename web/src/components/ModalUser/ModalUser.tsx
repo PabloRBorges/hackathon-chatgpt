@@ -18,8 +18,8 @@ export const ModalUser = () => {
 	};
 
 	useEffect(() => {
-		getHistoric()
-	}, [])
+		getHistoric();
+	}, []);
 
 	return (
 		<ContainerStyled className="modal is-text" role="dialog">
