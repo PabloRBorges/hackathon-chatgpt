@@ -3,11 +3,6 @@ using Core.interfaces.Repositories;
 using Core.interfaces.Services;
 using Core.models.Repositories;
 using Core.models.Requests;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.services
 {
@@ -22,13 +17,13 @@ namespace Core.services
             _chatGPTRepository = chatGPTRepository;
         }
 
-        //Grava no banco
-        //Prepara o builder
-        //Envia para o GPT
-        //Update no banco
-
-
         public async Task ChatAnalisesGPTAsync(ChatRequest chatRequest)
+        {
+
+            throw new NotImplementedException();
+        }
+
+        public async Task FellAnalisesGPTAsync(ChatRequest chatRequest)
         {
             if (chatRequest == null)
                 throw new Exception("ChatRequest is null");
@@ -55,12 +50,8 @@ namespace Core.services
 
             var fell = await _chatGPT.SendMessageAsync(messageGpt);
 
-
-        }
-
-        public Task FellAnalisesGPTAsync(ChatRequest chatRequest)
-        {
-            throw new NotImplementedException();
+            //Atualiza novamente o mongo db
+            await _chatGPTRepository.UpdateAsync(clientmodel.Nome, clientmodel);
         }
     }
 }

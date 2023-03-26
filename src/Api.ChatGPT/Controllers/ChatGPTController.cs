@@ -1,4 +1,5 @@
 ﻿using Core.interfaces.Services;
+using Core.models;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -33,7 +34,7 @@ namespace Api.ChatGPT.Controllers
 
         // POST api/<ChatGPTController>
         [HttpPost]
-        public async Task<string> Post([FromBody] string value)
+        public async Task<string> Post([FromBody] PromptFormat value)
         {
             var result = await _chatGPT.SendMessageAsync(value);
 

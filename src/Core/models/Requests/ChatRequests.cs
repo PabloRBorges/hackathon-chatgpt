@@ -3,6 +3,9 @@ namespace Core.models.Requests
 {
     public class ChatRequest
     {
+        [JsonProperty("ClientId", NullValueHandling = NullValueHandling.Ignore)]
+        public string ClientId { get; set; }
+
         [JsonProperty("Nome", NullValueHandling = NullValueHandling.Ignore)]
         public string Nome { get; set; }
 

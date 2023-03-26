@@ -2,7 +2,7 @@
 using Core.models.Repositories;
 using Infrastructure.Repositories.MongoDb;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver;
+
 
 namespace Api.ChatGPT.Controllers
 {
@@ -17,19 +17,19 @@ namespace Api.ChatGPT.Controllers
         }
 
         [HttpGet]
-        public async Task<List<Clients>> GetListClients()
+        public async Task<List<ClientsModel>> GetListClients()
         {
             return await _chatGPTReposity.GetListClientsAsync();
         }
 
         [HttpGet("{name}")]
-        public async Task<Clients> GetClientNameAsunc([FromRoute] string name)
+        public async Task<ClientsModel> GetClientNameAsunc([FromRoute] string name)
         {
             return await _chatGPTReposity.GetClientAsync(name);
         }
 
         [HttpPost]
-        public async Task<Clients> PostClients([FromBody] Clients clients)
+        public async Task<ClientsModel> PostClients([FromBody] ClientsModel clients)
         {
             await _chatGPTReposity.CreateAsync(clients);
 
@@ -37,7 +37,7 @@ namespace Api.ChatGPT.Controllers
         }
 
         [HttpPut("{name}")]
-        public async Task<Clients> PutAsync([FromRoute] string name, [FromBody] Clients clients)
+        public async Task<ClientsModel> PutAsync([FromRoute] string name, [FromBody] ClientsModel clients)
         {
             await _chatGPTReposity.UpdateAsync(name, clients);
 
