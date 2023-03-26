@@ -29,11 +29,11 @@ namespace ProjectChapGPT.API.Api
             });
 
             services
-                .AddScoped<IChatGPT, ChatGPT>()
+                .AddScoped<IChatGPTServices, ChatGPT>()
                 .AddTransient<ISendMessagesToGPT, SendMessagesToGPT>();
 
             services
-                .AddSingleton<IChatGPTRepository, ChatGPTRepository>();
+                .AddSingleton<IChatGPTRepository, IRepositoryBase>();
 
 
             services.AddCors(options =>

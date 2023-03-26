@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Core.interfaces.Services
 {
-    public interface IChatGPT
+    public interface IChatGPTServices
     {
-        Task<string> SendMessageAsync(PromptFormat message);
+        Task<string> SendMessageAsync(string message);
     }
 }
