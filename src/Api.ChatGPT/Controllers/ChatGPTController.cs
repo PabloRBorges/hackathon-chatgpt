@@ -23,14 +23,16 @@ namespace Api.ChatGPT.Controllers
         [HttpGet]
         public async Task<ICollection<ClientResponse>> GetListClients()
         {
-            var result = _chatGPTServices.GetAll();
+            var result = await _chatGPTServices.GetAllClientsWithFeel();
+
+            return result;
 
         }
 
         [HttpGet("{name}")]
         public async Task<ClientsModel> GetClientNameAsunc([FromRoute] string name)
         {
-            
+
         }
 
         [HttpPost]
@@ -39,13 +41,13 @@ namespace Api.ChatGPT.Controllers
             // await _chatGPTReposity.CreateAsync(clients);
 
             await _sendMessagesToGPT.FellAnalisesGPTAsync(clients);
-            
+
         }
 
         [HttpPut("{name}")]
         public async Task<ClientsModel> PutAsync([FromRoute] string name, [FromBody] ClientsModel clients)
         {
-            
+
 
             return clients;
         }
@@ -53,7 +55,7 @@ namespace Api.ChatGPT.Controllers
         [HttpDelete("{name}")]
         public async Task RemoveClientsAsync([FromRoute] string name)
         {
-            
+
         }
 
     }
