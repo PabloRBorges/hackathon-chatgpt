@@ -29,9 +29,11 @@ namespace Api.ChatGPT.Controllers
 
         }
 
-        [HttpGet("{name}")]
-        public async Task<ClientsModel> GetClientNameAsunc([FromRoute] string name)
+        [HttpGet("{clientId}")]
+        public async Task<ClientsModel> GetClientHistoricNameAssync([FromRoute] string clientId)
         {
+
+
 
         }
 
