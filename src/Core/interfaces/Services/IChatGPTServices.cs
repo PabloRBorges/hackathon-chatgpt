@@ -1,4 +1,5 @@
-﻿using Core.models;
+﻿using Core.models.Requests;
+using Core.models.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace Core.interfaces.Services
 {
     public interface IChatGPTServices
     {
-        Task<string> SendMessageAsync(string message);
+        Task FellAnalisesGPTAsync(ChatRequest chatRequest);
+        Task ChatAnalisesGPTAsync(ChatRequest chatRequest);
+        Task<List<ClientResponse>> GetAllClientsWithFeel();
     }
 }
