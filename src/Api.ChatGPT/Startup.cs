@@ -26,7 +26,6 @@ namespace ProjectChapGPT.API.Api
             {
                 options.ConnectionString = Configuration.GetSection("CONNECTION_STRING_MONGODB").Value;
                 options.DatabaseName = Configuration.GetSection("NOME_DO_BANCO").Value;
-                options.CollectionName = Configuration.GetSection("COLLECTION_NAME").Value;
             });
 
             services

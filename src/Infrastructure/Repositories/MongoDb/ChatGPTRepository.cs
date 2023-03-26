@@ -15,11 +15,13 @@ namespace Infrastructure.Repositories.MongoDb
             var mongoClient = new MongoClient(options.Value.ConnectionString);
             var db = mongoClient.GetDatabase(options.Value.DatabaseName);
 
-            _ClientsCollection = db.GetCollection<ClientsModel>(options.Value.CollectionName);
+            _ClientsCollection = db.GetCollection<ClientsModel>("Clients");
         }
 
-        public async Task<List<ClientsModel>> GetListClientsAsync()
+        public async Task<ICollection<ClientsModel>> GetListClientsAsync()
         {
+            //var filterQuery = Builders<ClientsModel>.Filter.ElemMatch(x => x.ClientId);
+
             return await _ClientsCollection.Find(x => true).ToListAsync();
         }
 
@@ -29,7 +31,7 @@ namespace Infrastructure.Repositories.MongoDb
         }
 
         public async Task CreateAsync(ClientsModel client)
-        {
+        {            
             await _ClientsCollection.InsertOneAsync(client);
         }
 

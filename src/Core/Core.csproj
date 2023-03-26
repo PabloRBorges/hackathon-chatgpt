@@ -17,4 +17,8 @@
     <PackageReference Include="OpenAI" Version="1.6.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="models\Response\" />
+  </ItemGroup>
+
 </Project>
