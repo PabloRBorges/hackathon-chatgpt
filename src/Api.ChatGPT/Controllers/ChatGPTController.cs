@@ -1,59 +1,60 @@
-﻿using Core.interfaces.Services;
-using Core.models;
+﻿using Core.interfaces.Repositories;
+using Core.interfaces.Services;
+using Core.models.Repositories;
 using Core.models.Requests;
-using Core.services;
+using Core.models.Responses;
+using Infrastructure.Repositories.MongoDb;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace Api.ChatGPT.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class ChatGPTController : ControllerBase
     {
-        private readonly IChatGPTServices _chatGPT;
-        private readonly ISendMessagesToGPT _sendMessagesToGPT;
+        private readonly IChatGPTServices _chatGPTServices;
 
-        public ChatGPTController(ISendMessagesToGPT sendMessagesToGPT)
+        public ChatGPTController(IChatGPTServices sendMessagesToGPT)
         {
-            _sendMessagesToGPT = sendMessagesToGPT;
+            _chatGPTServices = sendMessagesToGPT;
         }
 
-        // GET: api/<ChatGPTController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<ICollection<ClientResponse>> GetListClients()
         {
-            return new string[] { "value1", "value2" };
+            var result = _chatGPTServices.GetAll();
+
         }
 
-        // GET api/<ChatGPTController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{name}")]
+        public async Task<ClientsModel> GetClientNameAsunc([FromRoute] string name)
         {
-
-
-            return "value";
+            
         }
 
-        // POST api/<ChatGPTController>
         [HttpPost]
-        public async Task<ChatGptResponse> Post([FromBody] ChatRequest value)
+        public async Task PostClients([FromBody] ChatRequest clients)
         {
-            var result = _sendMessagesToGPT.FellAnalisesGPTAsync(value);
+            // await _chatGPTReposity.CreateAsync(clients);
 
-            return result;
+            await _sendMessagesToGPT.FellAnalisesGPTAsync(clients);
+            
         }
 
-        // PUT api/<ChatGPTController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("{name}")]
+        public async Task<ClientsModel> PutAsync([FromRoute] string name, [FromBody] ClientsModel clients)
         {
+            
+
+            return clients;
         }
 
-        // DELETE api/<ChatGPTController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{name}")]
+        public async Task RemoveClientsAsync([FromRoute] string name)
         {
+            
         }
+
     }
 }
