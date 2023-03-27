@@ -26,5 +26,13 @@ namespace Api.ChatGPT.Controllers
             var result = await _chatGPTServices.GetHistoricFeelResponse(clientId);
             return result;
         }
+
+        //Get all feel by client
+        [HttpGet]
+        public async Task<ICollection<FeellClientResponse>> GetAllFeelsClient()
+        {
+            var result = await _chatGPTServices.GetAllFeelsClients();
+            return result;
+        }
     }
 }
