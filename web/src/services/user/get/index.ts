@@ -80,14 +80,14 @@ export const getGraphData = async () => {
 		return {
 			error: false,
 			data: response.data.map((item: any) => {
-				if (item.tipo === "Suporteruim") {
+				if (item.tipo === 'Suporteruim') {
 					return {
 						...item,
-						tipo: "Suporte"
-					}
+						tipo: 'Suporte',
+					};
 				}
 
-				return item
+				return item;
 			}),
 		};
 	} catch (error) {
@@ -98,7 +98,7 @@ export const getGraphData = async () => {
 	}
 };
 
-export const getGraphFells = async () => {
+export const getGraphFeels = async () => {
 	try {
 		const response = await api.get('/FeelsClients');
 		return {

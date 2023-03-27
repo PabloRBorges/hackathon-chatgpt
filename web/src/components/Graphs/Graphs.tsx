@@ -51,7 +51,7 @@ export const Graphs = () => {
 	};
 
 	const getFells = async () => {
-		const response = await userService.getGraphFells();
+		const response = await userService.getGraphFeels();
 		if (response.error) {
 			// Should be implement a logic when api return error
 			return;
@@ -66,7 +66,7 @@ export const Graphs = () => {
 				data: response.data.map(
 					(item: { feel: string; valor: string }) => item.valor
 				),
-				backgroundColor: colors,
+				backgroundColor: colors2,
 				hoverOffset: 1,
 			},
 		];
@@ -77,10 +77,6 @@ export const Graphs = () => {
 		});
 	};
 
-	useEffect(() => {
-		getFells();
-	}, []);
-
 	const getGraph = async () => {
 		const response = await userService.getGraphData();
 
@@ -89,15 +85,11 @@ export const Graphs = () => {
 			return;
 		}
 
-		const labels = response.data.map(
-			(item: { feel: string; valor: string }) => item.feel
-		);
+		const labels = response.data.map((item: any) => item.tipo);
 		const datasets = [
 			{
-				labels: colors2,
-				data: response.data.map(
-					(item: { feel: string; valor: string }) => item.valor
-				),
+				labels: colors,
+				data: response.data.map((item: any) => item.valor),
 				backgroundColor: colors,
 				hoverOffset: 1,
 			},
@@ -110,6 +102,7 @@ export const Graphs = () => {
 	};
 
 	useEffect(() => {
+		getFells();
 		getGraph();
 	}, []);
 
@@ -141,21 +134,8 @@ export const Graphs = () => {
 		},
 	};
 
-	const dataFeels = {
-		labels: newOrderFeels?.labels.map((feel) => handleConvertFeel(feel)),
-		datasets: [
-			{
-				labels: colors2,
-				data: newOrderFeels?.datasets.map((data: any) => data * 1),
-				backgroundColor: colors2,
-				hoverOffset: 4,
-			},
-		],
-	};
-
 	const config2 = {
 		type: 'doughnut',
-		dataFeels,
 		options: {
 			responsive: true,
 			plugins: {
@@ -189,7 +169,7 @@ export const Graphs = () => {
 					<Doughnut options={config.options} data={newOrderData} />
 				)}
 				{newOrderFeels && (
-					<Doughnut options={config2.options} data={dataFeels} />
+					<Doughnut options={config2.options} data={newOrderFeels} />
 				)}
 			</ChartStyled>
 		</ContainerGraphStyled>
