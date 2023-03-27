@@ -77,7 +77,21 @@ export const getFeels = async (id: string) => {
 export const getGraphData = async () => {
 	try {
 		const response = await api.get('/HistoricChatMessages');
-		console.log(response.data) 
+		return {
+			error: false,
+			data: response.data,
+		};
+	} catch (error) {
+		return {
+			error: false,
+			data: error,
+		};
+	}
+};
+
+export const getGraphFells = async () => {
+	try {
+		const response = await api.get('/FeelsClients');
 		return {
 			error: false,
 			data: response.data,

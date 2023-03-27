@@ -13,21 +13,21 @@ const NEGATIVE_FEEL = 'negative';
 const USER_CANCELLED = 'cancelado';
 
 type User = {
-		clientId: string;
-		nome: string;
-		idade: number,
-		cidade: string;
-		sexo: string;
-		tempoContrato: number;
-		disparoContratado: number;
-		usoDeDisparo: number;
-		contactHating: number;
-		tempodaPrimeiraMensagem: number;
-		setorDeCancelamento: string;
-		historicFeel: string;
-		historicoMotivo: string;
-		status: string;
-	}
+	clientId: string;
+	nome: string;
+	idade: number;
+	cidade: string;
+	sexo: string;
+	tempoContrato: number;
+	disparoContratado: number;
+	usoDeDisparo: number;
+	contactHating: number;
+	tempodaPrimeiraMensagem: number;
+	setorDeCancelamento: string;
+	historicFeel: string;
+	historicoMotivo: string;
+	status: string;
+};
 
 /**
  * @export
@@ -54,11 +54,6 @@ export const CustomerList = (): JSX.Element => {
 	useEffect(() => {
 		getUsersData();
 	}, []);
-
-	const getDataForFellGraph = () => {
-		const data = [];
-		user?.map((item) => item.)
-	}
 
 	const verifiedCustomertatus = (status: string) => {
 		if (status === USER_CANCELLED) {
