@@ -15,7 +15,7 @@ export const Menu = (): JSX.Element => (
 			<div className="navbar-brand">
 				<a className="navbar-item">
 					<span className="navbar-item has-text-danger-dark has-text-weight-bold is-size-4">
-						Cancelamentos
+						Análise IA - Comportamental
 					</span>
 				</a>
 			</div>

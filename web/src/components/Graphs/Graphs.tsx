@@ -30,7 +30,8 @@ const NEGATIVE_FEEL = 'negative';
 export const Graphs = () => {
 	const colors = ['#59101D', '#921A30', '#D92748'];
 
-	const colors2 = ['#1A8226', '#BF7118', '#921A30'];
+	const colors2 = ['#1A8226', '#921A30','#BF7118'];
+
 	const [newOrderData, setNewOrderData] = useState<PropsDougnhutGraphs | null>(
 		null
 	);
