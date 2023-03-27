@@ -78,7 +78,7 @@ export const CustomerList = (): JSX.Element => {
 				return 'Muito Satisfeito';
 
 			case NEGATIVE_FEEL:
-				return 'fak fa-error-medium';
+				return 'Insatisfeito';
 
 			default:
 				return '';
@@ -101,7 +101,6 @@ export const CustomerList = (): JSX.Element => {
 		switch (feel) {
 			case POSITIVE_FEEL:
 				return ["badge is-success is-light", "fak fa-success-medium"]
-
 			case NEUT_FEEL:
 				return ["badge is-warning is-light", "fak fa-warning-medium"]
 			case NEUT_FEEL:
@@ -146,9 +145,9 @@ export const CustomerList = (): JSX.Element => {
 
 								<td>{verifiedCustomertatus(customer.status)}</td>
 								<td>
-									<span className={getStyledFeel(customer.status)[0]}>
+									<span className={getStyledFeel(customer.historicFeel)[0]}>
 										<span className="icon is-medium">
-											<i className={getStyledFeel(customer.status)[1]} />
+											<i className={getStyledFeel(customer.historicFeel)[1]} />
 										</span>
 										<span>{handleConvertFeel(customer.historicFeel)}</span>
 									</span>
