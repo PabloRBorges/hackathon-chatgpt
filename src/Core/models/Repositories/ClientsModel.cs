@@ -29,5 +29,7 @@ namespace Core.models.Repositories
         public long? TempodaPrimeiraMensagem { get; set; }
         [BsonElement("SetorDeCancelamento")]
         public string? SetorDeCancelamento { get; set; }
+        [BsonElement("Status")]
+        public string Status { get; set; }
     }
 }

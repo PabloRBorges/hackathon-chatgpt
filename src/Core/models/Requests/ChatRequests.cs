@@ -35,5 +35,9 @@ namespace Core.models.Requests
 
         [JsonProperty("SetorDeCancelamento", NullValueHandling = NullValueHandling.Ignore)]
         public string SetorDeCancelamento { get; set; }
+
+        [JsonProperty("Status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; set; }
+
     }
 }
