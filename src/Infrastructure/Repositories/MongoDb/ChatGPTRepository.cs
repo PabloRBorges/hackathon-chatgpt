@@ -27,7 +27,7 @@ namespace Infrastructure.Repositories.MongoDb
 
         public async Task<ClientsModel> GetClientAsync(string nome)
         {
-            return await _ClientsCollection.Find(x => x.Nome == nome).FirstOrDefaultAsync();
+            return await _ClientsCollection.Find(x => x.ClientId == nome).FirstOrDefaultAsync();
         }
 
         public async Task CreateAsync(ClientsModel client)
@@ -42,7 +42,7 @@ namespace Infrastructure.Repositories.MongoDb
 
         public async Task RemoveAsync(string nome)
         {
-            await _ClientsCollection.DeleteOneAsync(x => x.Nome == nome);
+            await _ClientsCollection.DeleteOneAsync(x => x.ClientId == nome);
         }
     }
 }
