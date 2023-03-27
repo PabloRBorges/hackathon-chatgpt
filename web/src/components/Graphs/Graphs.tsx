@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Chart, ArcElement, Legend, CategoryScale } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import { getGraphData } from '@src/services/user/get';
 import { ChartStyled, ContainerGraphStyled } from './styled';
 
 Chart.register(ArcElement, CategoryScale);
@@ -42,6 +43,16 @@ export const Graphs = () => {
 		datasI: NUMBER_CFG,
 		colorsI: colors,
 	});
+
+	const getGraph = async () => {
+		const data = await getGraphData();
+		setNewOrderData(data.data);
+		return data;
+	};
+
+	useEffect(() => {
+		getGraph();
+	}, []);
 
 	const data = {
 		labels: newOrderData.labelsI,

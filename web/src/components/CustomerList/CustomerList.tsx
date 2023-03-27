@@ -1,23 +1,14 @@
 import { useEffect, useState } from 'react';
 
-import {
-	EMPTY,
-	STATUS_CANCELED,
-	STATUS_CANCELLING,
-} from '@src/configuration/contants/constants';
-import userService from '@src/services/user'
+import { EMPTY } from '@src/configuration/contants/constants';
+import userService from '@src/services/user';
 
 import { useUserData } from '@src/Providers/UserData/useUserData';
-import {
-	ButtonStyled,
-	MenuSideStyled,
-	WrapperTableAreaStyled,
-} from './styled';
+import { ButtonStyled, MenuSideStyled, WrapperTableAreaStyled } from './styled';
 
-const NEUT_FEEL = "neut"
-const POSITIVE_FEEL = "positive"
-const NEGATIVE_FEEL = "negative"
-
+const NEUT_FEEL = 'neut';
+const POSITIVE_FEEL = 'positive';
+const NEGATIVE_FEEL = 'negative';
 
 /**
  * @export
@@ -31,39 +22,38 @@ export const CustomerList = (): JSX.Element => {
 	const { handleSwitchModal, handleChangeUserData } = useUserData();
 	const [user, setUser] = useState<any>([]);
 
-
 	const getUsersData = async () => {
 		const response = await userService.get();
 		if (response.error) {
 			// Should be implement a logic when api return error
-			return
+			return;
 		}
 
-		setUser(response.data)
-	}
+		setUser(response.data);
+	};
 
 	useEffect(() => {
-		getUsersData()
-	}, [])
+		getUsersData();
+	}, []);
 
-	const verifiedCustomertatus = (status: string) => {
-		if (status === STATUS_CANCELED) {
+	const verifiedCustomertatus = (fell: string) => {
+		if (fell === NEGATIVE_FEEL) {
 			return (
 				<span className="badge is-danger is-light">
 					<span className="icon is-medium">
 						<i className="fak fa-error-medium" />
 					</span>
-					<span>{status}</span>
+					<span>{fell}</span>
 				</span>
 			);
 		}
-		if (status === STATUS_CANCELLING) {
+		if (fell === NEUT_FEEL) {
 			return (
 				<span className="badge is-warning is-light">
 					<span className="icon is-medium">
 						<i className="fak fa-warning-medium" />
 					</span>
-					<span>{status}</span>
+					<span>{fell}</span>
 				</span>
 			);
 		}
@@ -72,7 +62,7 @@ export const CustomerList = (): JSX.Element => {
 				<span className="icon is-medium">
 					<i className="fak fa-success-medium" />
 				</span>
-				<span>{status}</span>
+				<span>{fell}</span>
 			</span>
 		);
 	};
@@ -81,28 +71,27 @@ export const CustomerList = (): JSX.Element => {
 		name: string,
 		status: string,
 		sentiment: string,
-		id: string,
+		id: string
 	) => {
 		handleChangeUserData({ name, status, sentiment, id });
 		handleSwitchModal();
 	};
 
 	const handleConvertFeel = (feel: string) => {
-
 		switch (feel) {
 			case NEUT_FEEL:
-				return 'Satisfeito'
+				return 'Satisfeito';
 
 			case POSITIVE_FEEL:
-				return 'Muito Satisfeito'
+				return 'Muito Satisfeito';
 
 			case NEGATIVE_FEEL:
-				return 'Insatisfeito'
+				return 'Insatisfeito';
 
 			default:
-				return ''
+				return '';
 		}
-	}
+	};
 
 	return (
 		<WrapperTableAreaStyled>
@@ -112,14 +101,13 @@ export const CustomerList = (): JSX.Element => {
 				<thead>
 					<tr>
 						<th>Nome</th>
-						<th>Motivos</th>
-						<th>Status</th>
-						<th>Sentimento</th>
+						<th>Status do contrato</th>
+						<th>Sentimento do cliente</th>
+						<th>Último chat</th>
 					</tr>
 				</thead>
 				<tbody>
-					{
-						user?.length > EMPTY &&
+					{user?.length > EMPTY &&
 						user?.map((customer: any) => (
 							<tr key={Math.random()}>
 								<td>
@@ -138,17 +126,14 @@ export const CustomerList = (): JSX.Element => {
 									</ButtonStyled>
 								</td>
 
-								<td>
-									Histórico de motivos{' '}
-									<small>{customer.historicFeel}</small>
-								</td>
 								<td>{verifiedCustomertatus(customer.status)}</td>
-
 								<td>{handleConvertFeel(customer.historicFeel)}</td>
-							</tr >
+
+								<td>{customer.historicMotivo}</td>
+							</tr>
 						))}
-				</tbody >
-			</table >
-		</WrapperTableAreaStyled >
+				</tbody>
+			</table>
+		</WrapperTableAreaStyled>
 	);
 };

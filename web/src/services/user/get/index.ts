@@ -2,15 +2,14 @@ import api from '../../api';
 
 const convertFeel = (feel: string) => {
 	switch (feel) {
-		case "negative":
+		case 'negative':
 			return 1;
 
-		case "neut":
+		case 'neut':
 			return 2;
 
-		case "positive":
+		case 'positive':
 			return 3;
-
 
 		default:
 			break;
@@ -24,20 +23,29 @@ export const get = async () => {
 		return {
 			error: false,
 			data: response.data,
-		}
+		};
 	} catch (error) {
 		return {
 			error: false,
 			data: error,
-		}
+		};
 	}
-}
+};
 
 function getMonthInPortuguese(dataString: string) {
 	const meses = [
-		"Janeiro", "Fevereiro", "Março", "Abril",
-		"Maio", "Junho", "Julho", "Agosto",
-		"Setembro", "Outubro", "Novembro", "Dezembro"
+		'Janeiro',
+		'Fevereiro',
+		'Março',
+		'Abril',
+		'Maio',
+		'Junho',
+		'Julho',
+		'Agosto',
+		'Setembro',
+		'Outubro',
+		'Novembro',
+		'Dezembro',
 	];
 
 	const data = new Date(dataString);
@@ -57,14 +65,14 @@ export const getFeels = async (id: string) => {
 				data: getMonthInPortuguese(item.data),
 				value: convertFeel(item.feel),
 			})),
-		}
+		};
 	} catch (error) {
 		return {
 			error: false,
 			data: error,
-		}
+		};
 	}
-}
+};
 
 export const getGraphData = async () => {
 	try {
@@ -73,11 +81,11 @@ export const getGraphData = async () => {
 		return {
 			error: false,
 			data: response.data,
-		}
+		};
 	} catch (error) {
 		return {
 			error: false,
 			data: error,
-		}
+		};
 	}
-}
+};
