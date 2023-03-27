@@ -10,6 +10,8 @@ const NEUT_FEEL = 'neut';
 const POSITIVE_FEEL = 'positive';
 const NEGATIVE_FEEL = 'negative';
 
+const USER_CANCELLED = 'cancelado';
+
 /**
  * @export
  * @component
@@ -36,24 +38,14 @@ export const CustomerList = (): JSX.Element => {
 		getUsersData();
 	}, []);
 
-	const verifiedCustomertatus = (fell: string) => {
-		if (fell === NEGATIVE_FEEL) {
+	const verifiedCustomertatus = (status: string) => {
+		if (status === USER_CANCELLED) {
 			return (
 				<span className="badge is-danger is-light">
 					<span className="icon is-medium">
 						<i className="fak fa-error-medium" />
 					</span>
-					<span>{fell}</span>
-				</span>
-			);
-		}
-		if (fell === NEUT_FEEL) {
-			return (
-				<span className="badge is-warning is-light">
-					<span className="icon is-medium">
-						<i className="fak fa-warning-medium" />
-					</span>
-					<span>{fell}</span>
+					<span>{status}</span>
 				</span>
 			);
 		}
@@ -62,7 +54,7 @@ export const CustomerList = (): JSX.Element => {
 				<span className="icon is-medium">
 					<i className="fak fa-success-medium" />
 				</span>
-				<span>{fell}</span>
+				<span>{status}</span>
 			</span>
 		);
 	};
@@ -86,10 +78,36 @@ export const CustomerList = (): JSX.Element => {
 				return 'Muito Satisfeito';
 
 			case NEGATIVE_FEEL:
-				return 'Insatisfeito';
+				return 'fak fa-error-medium';
 
 			default:
 				return '';
+		}
+	};
+
+
+
+	const handleConvertHistoric = (historic: string) => {
+		if (historic === "Suporteruim") {
+			return "Suporte"
+		}
+
+		return historic
+	};
+
+	const getStyledFeel = (feel: string) => {
+
+
+		switch (feel) {
+			case POSITIVE_FEEL:
+				return ["badge is-success is-light", "fak fa-success-medium"]
+
+			case NEUT_FEEL:
+				return ["badge is-warning is-light", "fak fa-warning-medium"]
+			case NEUT_FEEL:
+				return ["badge is-danger is-light", "fak fa-warning-medium"]
+			default:
+				return []
 		}
 	};
 
@@ -127,9 +145,16 @@ export const CustomerList = (): JSX.Element => {
 								</td>
 
 								<td>{verifiedCustomertatus(customer.status)}</td>
-								<td>{handleConvertFeel(customer.historicFeel)}</td>
+								<td>
+									<span className={getStyledFeel(customer.status)[0]}>
+										<span className="icon is-medium">
+											<i className={getStyledFeel(customer.status)[1]} />
+										</span>
+										<span>{handleConvertFeel(customer.historicFeel)}</span>
+									</span>
+								</td>
 
-								<td>{customer.historicMotivo}</td>
+								<td>{handleConvertHistoric(customer.historicoMotivo)}</td>
 							</tr>
 						))}
 				</tbody>
