@@ -11,4 +11,10 @@ namespace Core.models.Responses
         public string Tipo { get; set; }
         public double Valor { get; set; }
     }
+
+    public class FeellClientResponse
+    {
+        public string Feel { get; set; }
+        public double Valor { get; set; }
+    }
 }

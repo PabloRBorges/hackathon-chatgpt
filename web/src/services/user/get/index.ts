@@ -88,3 +88,20 @@ export const getGraphData = async () => {
 		};
 	}
 };
+
+export const getGraphFells = async () => {
+	try {
+		const response = await api.get('/FeelsClients');
+		await api.get('/FeelsClients');
+
+		return {
+			error: false,
+			data: response.data,
+		};
+	} catch (error) {
+		return {
+			error: false,
+			data: error,
+		};
+	}
+};

@@ -1,3 +1,3 @@
-import { get, getFeels, getGraphData } from './get';
+import { get, getFeels, getGraphData, getGraphFells } from './get';
 
-export default { get, getFeels, getGraphData };
+export default { get, getFeels, getGraphData, getGraphFells };

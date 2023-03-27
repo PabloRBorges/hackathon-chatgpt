@@ -26,7 +26,6 @@ namespace Core.services
             _historyFeelsChatRepository = historyFeelsChatRepository;
         }
 
-
         public async Task CreateChatAnalisesGPTAsync(ChatRequest chatRequest)
         {
             if (chatRequest == null)
@@ -85,37 +84,6 @@ namespace Core.services
             await _historyFeelsChatRepository.CreateAsync(createChat);
         }
 
-        //public async Task FellAnalisesGPTAsync(ChatRequest chatRequest)
-        //{
-        //    if (chatRequest == null)
-        //        throw new Exception("ChatRequest is null");
-
-        //    var clientmodel = new ClientsModel()
-        //    {
-        //        Cidade = chatRequest.Cidade,
-        //        ContactHating = chatRequest.ContactHating,
-        //        DisparoContratado = chatRequest.DisparoContratado,
-        //        Idade = chatRequest.Idade,
-        //        Nome = chatRequest.Nome,
-        //        SetorDeCancelamento = chatRequest.SetorDeCancelamento,
-        //        Sexo = chatRequest.Sexo,
-        //        TempoContrato = chatRequest.TempoContrato,
-        //        TempodaPrimeiraMensagem = chatRequest.TempodaPrimeiraMensagem,
-        //        UsoDeDisparo = chatRequest.UsoDeDisparo,
-        //        ClientId= chatRequest.ClientId,
-        //        Status = chatRequest.Status
-        //    };
-
-        //    await _chatGPTRepository.CreateAsync(clientmodel);
-
-        //    var builder = new MakeMessages();
-        //    var messageGpt = builder.CreateMessageToFels(chatRequest);
-
-        //    var fell = await _chatGPT.VerifyFeelClientAsync(messageGpt);
-
-        //    await _chatGPTRepository.UpdateAsync(clientmodel.Nome, clientmodel);
-        //}
-
         public async Task<ICollection<ClientResponse>> GetAllClientsWithFeel()
         {
             var clientList = await _chatGPTRepository.GetListClientsAsync();
@@ -165,6 +133,15 @@ namespace Core.services
 
             var test = result.GroupBy(x => x.Motivo).Select(x => new MotivoCancelamentoResponse { Valor = x.Count(), Tipo = x.Key.Replace("\n","").Replace(".","") }).ToList();
             
+            return test;
+        }
+
+        public async Task<ICollection<FeellClientResponse>> GetAllFeelsClients()
+        {
+            var result = await _chatGPTHistoryRepository.GetListHistoricAsync();
+
+            var test = result.GroupBy(x => x.Feel).Select(x => new FeellClientResponse { Valor = x.Count(), Feel = x.Key.Replace("\n", "").Replace(".", "").Replace(" ", "") }).ToList();
+
             return test;
         }
 

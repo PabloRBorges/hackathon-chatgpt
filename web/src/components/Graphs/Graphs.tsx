@@ -2,15 +2,25 @@ import { useEffect, useState } from 'react';
 import { Chart, ArcElement, Legend, CategoryScale } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import userService from '@src/services/user';
+
 import { ChartStyled, ContainerGraphStyled } from './styled';
 
 Chart.register(ArcElement, CategoryScale);
 
 Chart.register(Legend);
 type PropsDougnhutGraph = {
+	labelsI: Array<string>;
+	datasI: Array<string>;
+};
+
+type PropsDougnhutGraphCancelled = {
 	labels: Array<string>;
 	datasets: any;
 };
+
+const NEUT_FEEL = 'neut';
+const POSITIVE_FEEL = 'positive';
+const NEGATIVE_FEEL = 'negative';
 
 /**
  * @export
@@ -23,14 +33,39 @@ type PropsDougnhutGraph = {
 export const Graphs = () => {
 	const colors = ['#59101D', '#921A30', '#D92748'];
 
-	const labels2 = [
-		'Cliente Satisfeito',
-		'Cliente Neutro',
-		'Cliente Insatisfeito',
-	];
 	const colors2 = ['#1A8226', '#BF7118', '#921A30'];
-	const numbers2 = [60, 30, 10];
-	const [newOrderData, setNewOrderData] = useState<PropsDougnhutGraph | null>(null);
+	const [newOrderData, setNewOrderData] = useState<PropsDougnhutGraphCancelled | null>(null);
+	const [newOrderFeels, setNewOrderFeels] = useState<PropsDougnhutGraph | null>(null);
+
+	const handleConvertFeel = (feel: string) => {
+		switch (feel) {
+			case NEUT_FEEL:
+				return 'Satisfeito';
+
+			case POSITIVE_FEEL:
+				return 'Muito Satisfeito';
+
+			case NEGATIVE_FEEL:
+				return 'Insatisfeito';
+
+			default:
+				return '';
+		}
+	};
+
+	const getFells = async () => {
+		const response = await userService.getGraphFells();
+		if (response.error) {
+			// Should be implement a logic when api return error
+			return;
+		}
+
+		setNewOrderFeels(response.data);
+	};
+
+	useEffect(() => {
+		getFells();
+	}, []);
 
 	const getGraph = async () => {
 		const response = await userService.getGraphData();
@@ -89,11 +124,11 @@ export const Graphs = () => {
 	};
 
 	const data2 = {
-		labels: labels2,
+		labels: newOrderFeels?.labelsI.map((feel) => handleConvertFeel(feel)),
 		datasets: [
 			{
 				labels: colors2,
-				data: numbers2,
+				data: newOrderFeels?.datasI,
 				backgroundColor: colors2,
 				hoverOffset: 4,
 			},
@@ -137,7 +172,7 @@ export const Graphs = () => {
 				{newOrderData && (
 					<Doughnut options={config.options} data={newOrderData} />
 				)}
-				<Doughnut options={config2.options} data={data2} />
+				{/* <Doughnut options={config2.options} data={data2} /> */}
 			</ChartStyled>
 		</ContainerGraphStyled>
 	);

@@ -16,6 +16,7 @@ namespace Core.interfaces.Services
         Task<ICollection<HistoryFeelsResponse>> GetHistoricFeelResponse(string clientId);
         Task CreateChatMessages(AnaliseChatMessageRequest messages);
         Task<ICollection<MotivoCancelamentoResponse>> GetAllMotivations();
-        
+        Task<ICollection<FeellClientResponse>> GetAllFeelsClients();
+
     }
 }
