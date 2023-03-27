@@ -73,41 +73,43 @@ namespace Core.services
             {
                 ClientId = messages.ClientId,
                 Text = messages.Messages,
-                Motivo = result,
+                Motivo = result.Replace(".","").Replace("\n","").Replace(" ",""),
                 Date = DateTime.Now
             };
 
             await _historyFeelsChatRepository.CreateAsync(createChat);
         }
 
-        public async Task FellAnalisesGPTAsync(ChatRequest chatRequest)
-        {
-            if (chatRequest == null)
-                throw new Exception("ChatRequest is null");
+        //public async Task FellAnalisesGPTAsync(ChatRequest chatRequest)
+        //{
+        //    if (chatRequest == null)
+        //        throw new Exception("ChatRequest is null");
 
-            var clientmodel = new ClientsModel()
-            {
-                Cidade = chatRequest.Cidade,
-                ContactHating = chatRequest.ContactHating,
-                DisparoContratado = chatRequest.DisparoContratado,
-                Idade = chatRequest.Idade,
-                Nome = chatRequest.Nome,
-                SetorDeCancelamento = chatRequest.SetorDeCancelamento,
-                Sexo = chatRequest.Sexo,
-                TempoContrato = chatRequest.TempoContrato,
-                TempodaPrimeiraMensagem = chatRequest.TempodaPrimeiraMensagem,
-                UsoDeDisparo = chatRequest.UsoDeDisparo
-            };
+        //    var clientmodel = new ClientsModel()
+        //    {
+        //        Cidade = chatRequest.Cidade,
+        //        ContactHating = chatRequest.ContactHating,
+        //        DisparoContratado = chatRequest.DisparoContratado,
+        //        Idade = chatRequest.Idade,
+        //        Nome = chatRequest.Nome,
+        //        SetorDeCancelamento = chatRequest.SetorDeCancelamento,
+        //        Sexo = chatRequest.Sexo,
+        //        TempoContrato = chatRequest.TempoContrato,
+        //        TempodaPrimeiraMensagem = chatRequest.TempodaPrimeiraMensagem,
+        //        UsoDeDisparo = chatRequest.UsoDeDisparo,
+        //        ClientId= chatRequest.ClientId,
+        //        Status = chatRequest.Status
+        //    };
 
-            await _chatGPTRepository.CreateAsync(clientmodel);
+        //    await _chatGPTRepository.CreateAsync(clientmodel);
 
-            var builder = new MakeMessages();
-            var messageGpt = builder.CreateMessageToFels(chatRequest);
+        //    var builder = new MakeMessages();
+        //    var messageGpt = builder.CreateMessageToFels(chatRequest);
 
-            var fell = await _chatGPT.VerifyFeelClientAsync(messageGpt);
+        //    var fell = await _chatGPT.VerifyFeelClientAsync(messageGpt);
 
-            await _chatGPTRepository.UpdateAsync(clientmodel.Nome, clientmodel);
-        }
+        //    await _chatGPTRepository.UpdateAsync(clientmodel.Nome, clientmodel);
+        //}
 
         public async Task<ICollection<ClientResponse>> GetAllClientsWithFeel()
         {
@@ -156,21 +158,8 @@ namespace Core.services
         {
             var result = await _historyFeelsChatRepository.GetListHistoricAsync();
 
-            var test = result.GroupBy(x => x.Motivo).Select(x => new MotivoCancelamentoResponse { Valor = x.Count(), Tipo = x.Key }).ToList();
+            var test = result.GroupBy(x => x.Motivo).Select(x => new MotivoCancelamentoResponse { Valor = x.Count(), Tipo = x.Key.Replace("\n","").Replace(".","") }).ToList();
             
-
-            //foreach (var item in result)
-            //{
-            //    var itemlist = new MotivoCancelamentoResponse()
-            //    {
-            //        Tipo
-
-            //        ClientId = item.ClientId,
-            //        Motivo = item.Motivo.Replace("\n","").Replace(" ",""),
-            //        Text = item.Text
-            //    };
-            //    response.Add(itemlist);
-            //}
             return test;
         }
 

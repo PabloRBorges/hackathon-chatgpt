@@ -13,14 +13,15 @@ namespace Core.Adapter
         public ChatGPTAdapter()
         {
             //_openAIAPI = new OpenAIAPI(Environment.GetEnvironmentVariable(PRIVATE_KEY_CHATGPT));
-            _openAIAPI = new OpenAIAPI("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");
+            //_openAIAPI = new OpenAIAPI("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");
+            _openAIAPI = new OpenAIAPI("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");
         }
 
         public async Task<string> VerifyChatMessages(string message)
         {
             var arguments = $"Com base na conversa no texto entre os pipes |{message}| entre um cliente e um bot, informe qual foi o motivo de cancelamento do seviço pelo cliente: (financeiro, suporte ruim, Concorrente), a resposta só pode coter uma das três opções.";
 
-            var result = await _openAIAPI.Completions.CreateCompletionAsync(new CompletionRequest(arguments, model: Model.DavinciText , temperature: 0.7));
+            var result = await _openAIAPI.Completions.CreateCompletionAsync(new CompletionRequest(arguments, model: "text-davinci-003", temperature: 0.7));
 
             return result.Completions[0].Text;
         }
