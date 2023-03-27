@@ -125,7 +125,7 @@ export const CustomerList = (): JSX.Element => {
 
 	return (
 		<WrapperTableAreaStyled>
-			<MenuSideStyled>Cancelamentos</MenuSideStyled>
+			<MenuSideStyled>Análise de clients ativos e cancelados</MenuSideStyled>
 
 			<table className="table is-fullwidth">
 				<thead>
