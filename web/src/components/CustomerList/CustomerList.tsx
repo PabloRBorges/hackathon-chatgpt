@@ -103,7 +103,7 @@ export const CustomerList = (): JSX.Element => {
 				return ["badge is-success is-light", "fak fa-success-medium"]
 			case NEUT_FEEL:
 				return ["badge is-warning is-light", "fak fa-warning-medium"]
-			case NEUT_FEEL:
+			case NEGATIVE_FEEL:
 				return ["badge is-danger is-light", "fak fa-warning-medium"]
 			default:
 				return []
