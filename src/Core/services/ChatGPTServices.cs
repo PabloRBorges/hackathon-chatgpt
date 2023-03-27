@@ -48,6 +48,11 @@ namespace Core.services
                 Status = chatRequest.Status,
             };
 
+            var client = await _chatGPTRepository.GetClientAsync(clientmodel.ClientId);
+
+            if(client != null)
+                await _chatGPTRepository.RemoveAsync(clientmodel.ClientId);
+            
             await _chatGPTRepository.CreateAsync(clientmodel);
 
             var builder = new MakeMessages();

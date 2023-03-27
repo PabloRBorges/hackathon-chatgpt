@@ -129,7 +129,7 @@ export const CustomerList = (): JSX.Element => {
 								<td>{verifiedCustomertatus(customer.status)}</td>
 								<td>{handleConvertFeel(customer.historicFeel)}</td>
 
-								<td>{customer.historicMotivo}</td>
+								<td>{customer.historicoMotivo}</td>
 							</tr>
 						))}
 				</tbody>
