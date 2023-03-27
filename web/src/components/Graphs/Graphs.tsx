@@ -57,8 +57,8 @@ export const Graphs = () => {
 			return;
 		}
 
-		const labels = response.data.map(
-			(item: { feel: string; valor: string }) => item.feel
+		const labels = response.data.map((item: { feel: string; valor: string }) =>
+			handleConvertFeel(item.feel)
 		);
 		const datasets = [
 			{
