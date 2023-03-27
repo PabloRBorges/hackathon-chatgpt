@@ -17,16 +17,14 @@ namespace Api.ChatGPT.Controllers
         }
 
         [HttpGet]
-        public async Task<ICollection<HistoryChatMessagesResponse>> GetAllFeels()
+        public async Task<ICollection<HistoryChatMessagesResponse>> GetAll()
         {
             var result = await _chatGPTServices.GetAllMotivations();
-
             return result;
         }
 
-        //Post chat messages
         [HttpPost]
-        public async Task PostChatMessagesClient([FromBody] string clientId, string messages)
+        public async Task Post([FromBody] string clientId, string messages)
         {
             await _chatGPTServices.CreateChatMessages(messages, clientId);
         }

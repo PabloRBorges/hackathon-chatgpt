@@ -27,9 +27,41 @@ namespace Core.services
         }
 
 
-        public Task CreateChatAnalisesGPTAsync(ChatRequest chatRequest)
+        public async Task CreateChatAnalisesGPTAsync(ChatRequest chatRequest)
         {
-            throw new NotImplementedException();
+            if (chatRequest == null)
+                throw new Exception("ChatRequest is null");
+
+            var clientmodel = new ClientsModel()
+            {
+                ClientId = chatRequest.ClientId,
+                Cidade = chatRequest.Cidade,
+                ContactHating = chatRequest.ContactHating,
+                DisparoContratado = chatRequest.DisparoContratado,
+                Idade = chatRequest.Idade,
+                Nome = chatRequest.Nome,
+                SetorDeCancelamento = chatRequest.SetorDeCancelamento,
+                Sexo = chatRequest.Sexo,
+                TempoContrato = chatRequest.TempoContrato,
+                TempodaPrimeiraMensagem = chatRequest.TempodaPrimeiraMensagem,
+                UsoDeDisparo = chatRequest.UsoDeDisparo
+            };
+
+            await _chatGPTRepository.CreateAsync(clientmodel);
+
+            var builder = new MakeMessages();
+            var messageGpt = builder.CreateMessageToFels(chatRequest);
+
+            var feel = await _chatGPT.VerifyFeelClientAsync(messageGpt);
+
+            var feelmodel = new HistoryModel()
+            {
+                Feel = feel,
+                ClientId = clientmodel.ClientId,
+                Date = DateTime.Now
+            };
+
+            await _chatGPTHistoryRepository.CreateAsync(feelmodel);
         }
 
         public async Task CreateChatMessages(string messages, string clientId)
