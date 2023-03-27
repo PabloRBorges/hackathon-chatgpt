@@ -10,7 +10,7 @@ namespace Core.interfaces.Services
 {
     public interface IChatGPTServices
     {
-        Task FellAnalisesGPTAsync(ChatRequest chatRequest);
+        //Task FellAnalisesGPTAsync(ChatRequest chatRequest);
         Task CreateChatAnalisesGPTAsync(ChatRequest chatRequest);
         Task<ICollection<ClientResponse>> GetAllClientsWithFeel();
         Task<ICollection<HistoryFeelsResponse>> GetHistoricFeelResponse(string clientId);

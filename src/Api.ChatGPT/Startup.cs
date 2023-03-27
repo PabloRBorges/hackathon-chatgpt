@@ -34,8 +34,6 @@ namespace ProjectChapGPT.API.Api
             services
                 .AddScoped<IChatGPTServices, ChatGPTServices>()
                 .AddSingleton<IChatGPTAdapter, ChatGPTAdapter>();
-                
-       
 
             services
                 .AddSingleton<IChatGPTRepository, ChatGPTRepository>()
