@@ -1,4 +1,4 @@
-export const STATUS_CANCELED = 'Cancelado';
+export const STATUS_CANCELED = 'cancelado';
 export const STATUS_CANCELLING = 'Possível cancelamento';
 export const STATUS_NOT_CANCELLING = 'Baixa chance de cancelamento';
 export const STATUS_ACTIVE = 'Ativo';

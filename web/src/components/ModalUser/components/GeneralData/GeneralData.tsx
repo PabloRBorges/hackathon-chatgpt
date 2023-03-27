@@ -6,7 +6,7 @@ type Props = {
 	feeling: string;
 };
 
-const STATUS_CANCELLED = 'Cancelado';
+const STATUS_CANCELLED = 'cancelado';
 const STATUS_IS_POSSIBLE_TO_CANCEL = 'Possível cancelamento';
 const STATUS_IS_LOW_POSSIBLE_TO_CANCEL = 'Baixa chance de cancelamento';
 export const GeneralData = ({ name, status, feeling }: Props) => {
