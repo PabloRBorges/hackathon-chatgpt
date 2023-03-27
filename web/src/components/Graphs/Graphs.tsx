@@ -37,19 +37,17 @@ export const Graphs = () => {
 		'Concorrencia',
 	];
 
-	const labels2 = [
-		'Cliente Satisfeito',
-		'Cliente Neutro',
-		'Cliente Insatisfeito',
-	];
 	const colors2 = ['#1A8226', '#BF7118', '#921A30'];
-	const numbers2 = [60, 30, 10];
 	const [newOrderData, setNewOrderData] = useState<PropsDougnhutGraph>({
 		labelsI: labels,
 		datasI: NUMBER_CFG,
 		colorsI: colors,
 	});
-	const [newOrderFeels, setNewOrderFeels] = useState<PropsDougnhutGraph>();
+	const [newOrderFeels, setNewOrderFeels] = useState<PropsDougnhutGraph>({
+		labelsI: [],
+		datasI: [],
+		colorsI: [],
+	});
 
 	const handleConvertFeel = (feel: string) => {
 		switch (feel) {
