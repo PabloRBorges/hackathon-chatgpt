@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Chart, ArcElement, Legend, CategoryScale } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { getGraphData } from '@src/services/user/get';
+import userService from '@src/services/user';
+
 import { ChartStyled, ContainerGraphStyled } from './styled';
 
 Chart.register(ArcElement, CategoryScale);
@@ -12,6 +14,10 @@ type PropsDougnhutGraph = {
 	datasI: Array<number>;
 	colorsI: Array<string>;
 };
+
+const NEUT_FEEL = 'neut';
+const POSITIVE_FEEL = 'positive';
+const NEGATIVE_FEEL = 'negative';
 
 /**
  * @export
@@ -43,6 +49,37 @@ export const Graphs = () => {
 		datasI: NUMBER_CFG,
 		colorsI: colors,
 	});
+	const [newOrderFeels, setNewOrderFeels] = useState<PropsDougnhutGraph>();
+
+	const handleConvertFeel = (feel: string) => {
+		switch (feel) {
+			case NEUT_FEEL:
+				return 'Satisfeito';
+
+			case POSITIVE_FEEL:
+				return 'Muito Satisfeito';
+
+			case NEGATIVE_FEEL:
+				return 'Insatisfeito';
+
+			default:
+				return '';
+		}
+	};
+
+	const getFells = async () => {
+		const response = await userService.get();
+		if (response.error) {
+			// Should be implement a logic when api return error
+			return;
+		}
+
+		setNewOrderFeels(response.data);
+	};
+
+	useEffect(() => {
+		getFells();
+	}, []);
 
 	// const getGraph = async () => {
 	// 	const data = await getGraphData();
@@ -125,11 +162,11 @@ export const Graphs = () => {
 	};
 
 	const data2 = {
-		labels: labels2,
+		labels: newOrderFeels?.labelsI.map((feel) => handleConvertFeel(feel)),
 		datasets: [
 			{
 				labels: colors2,
-				data: numbers2,
+				data: newOrderFeels?.datasI,
 				backgroundColor: colors2,
 				hoverOffset: 4,
 			},
