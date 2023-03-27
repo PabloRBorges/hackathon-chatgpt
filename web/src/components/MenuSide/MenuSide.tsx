@@ -20,7 +20,7 @@ type Props = {
 export const MenuSide = ({ domain }: Props): JSX.Element => (
 	<Container>
 		<LogoStyled
-			src={`${domain}/images/zenvia-docs-logo.svg`}
+			src={`${domain}`}
 			alt="logo zenvia docs"
 		/>
 

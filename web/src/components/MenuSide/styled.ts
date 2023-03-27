@@ -13,7 +13,11 @@ export const Container = styled.aside`
 `;
 
 export const LogoStyled = styled.img`
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+
+
 	width: 170px;
 	margin-top: 32px;
-	margin-left: 8px;
 `;

@@ -14,7 +14,7 @@ export const Container = () => {
 		<>
 			{modalIsOpen && <ModalUser />}
 
-			<MenuSide domain="https://app.dev.d1.cx" />
+			<MenuSide domain="https://yt3.googleusercontent.com/RTGA6bbJfQ7PsOs4MBh5FO-kibF70yxmYUQOcIyd2VwvF3mZ7CmuzO9XA6VtjIbYda7F9iRC=s900-c-k-c0x00ffffff-no-rj" />
 			<Menu />
 
 			<ContainerStyled>
