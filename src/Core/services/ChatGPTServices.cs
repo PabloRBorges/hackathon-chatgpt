@@ -142,7 +142,8 @@ namespace Core.services
                     TempodaPrimeiraMensagem = item.TempodaPrimeiraMensagem,
                     UsoDeDisparo = item.UsoDeDisparo,
                     HistoricFeel = feelValue.Replace(" ","").Replace("\n",""),
-                    HistoricoMotivo = motivoValue.Replace(" ", "").Replace("\n","")
+                    HistoricoMotivo = motivoValue.Replace(" ", "").Replace("\n",""),
+                    Status = item.Status
                 };
 
                 result.Add(itemList);
@@ -151,23 +152,26 @@ namespace Core.services
             return result;
         }
 
-        public async Task<ICollection<HistoryChatMessagesResponse>> GetAllMotivations()
+        public async Task<ICollection<MotivoCancelamentoResponse>> GetAllMotivations()
         {
             var result = await _historyFeelsChatRepository.GetListHistoricAsync();
 
-            var response = new List<HistoryChatMessagesResponse>();
+            var test = result.GroupBy(x => x.Motivo).Select(x => new MotivoCancelamentoResponse { Valor = x.Count(), Tipo = x.Key }).ToList();
+            
 
-            foreach (var item in result)
-            {
-                var itemlist = new HistoryChatMessagesResponse()
-                {
-                    ClientId = item.ClientId,
-                    Motivo = item.Motivo.Replace("\n","").Replace(" ",""),
-                    Text = item.Text
-                };
-                response.Add(itemlist);
-            }
-            return response;
+            //foreach (var item in result)
+            //{
+            //    var itemlist = new MotivoCancelamentoResponse()
+            //    {
+            //        Tipo
+
+            //        ClientId = item.ClientId,
+            //        Motivo = item.Motivo.Replace("\n","").Replace(" ",""),
+            //        Text = item.Text
+            //    };
+            //    response.Add(itemlist);
+            //}
+            return test;
         }
 
         public async Task<ICollection<HistoryFeelsResponse>> GetHistoricFeelResponse(string clientId)

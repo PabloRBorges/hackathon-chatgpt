@@ -18,7 +18,7 @@ namespace Api.ChatGPT.Controllers
         }
 
         [HttpGet]
-        public async Task<ICollection<HistoryChatMessagesResponse>> GetAll()
+        public async Task<ICollection<MotivoCancelamentoResponse>> GetAll()
         {
             var result = await _chatGPTServices.GetAllMotivations();
             return result;

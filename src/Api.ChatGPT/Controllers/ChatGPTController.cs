@@ -1,9 +1,6 @@
-﻿using Core.interfaces.Repositories;
-using Core.interfaces.Services;
-using Core.models.Repositories;
+﻿using Core.interfaces.Services;
 using Core.models.Requests;
 using Core.models.Responses;
-using Infrastructure.Repositories.MongoDb;
 using Microsoft.AspNetCore.Mvc;
 
 
