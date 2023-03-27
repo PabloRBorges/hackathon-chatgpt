@@ -44,15 +44,15 @@ export const Graphs = () => {
 		colorsI: colors,
 	});
 
-	const getGraph = async () => {
-		const data = await getGraphData();
-		setNewOrderData(data.data);
-		return data;
-	};
+	// const getGraph = async () => {
+	// 	const data = await getGraphData();
+	// 	setNewOrderData(data.data);
+	// 	return data;
+	// };
 
-	useEffect(() => {
-		getGraph();
-	}, []);
+	// useEffect(() => {
+	// 	getGraph();
+	// }, []);
 
 	const data = {
 		labels: newOrderData.labelsI,
