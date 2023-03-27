@@ -1,4 +1,5 @@
 ﻿using Core.interfaces.Services;
+using Core.models.Requests;
 using Core.models.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,10 +25,9 @@ namespace Api.ChatGPT.Controllers
         }
 
         [HttpPost]
-        public async Task Post([FromBody] string clientId, string messages)
+        public async Task Post([FromBody] AnaliseChatMessageRequest messages)
         {
-            await _chatGPTServices.CreateChatMessages(messages, clientId);
+            await _chatGPTServices.CreateChatMessages(messages.Messages, messages.ClientId);
         }
-
     }
 }
