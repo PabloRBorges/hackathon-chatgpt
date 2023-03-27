@@ -12,8 +12,8 @@ namespace Core.Adapter
 
         public ChatGPTAdapter()
         {
-            _openAIAPI = new OpenAIAPI(Environment.GetEnvironmentVariable(PRIVATE_KEY_CHATGPT));
-            //_openAIAPI = new OpenAIAPI("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");
+            //_openAIAPI = new OpenAIAPI(Environment.GetEnvironmentVariable(PRIVATE_KEY_CHATGPT));
+            _openAIAPI = new OpenAIAPI("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");
         }
 
         public async Task<string> VerifyChatMessages(string message)
