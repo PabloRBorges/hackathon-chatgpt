@@ -40,7 +40,7 @@ export const ModalUser = () => {
 						feeling={user?.sentiment ?? ''}
 					/>
 
-					<LineGraph />
+					<LineGraph id={user?.id ?? ''} />
 				</section>
 				<footer className="modal-card-foot is-centered">
 					<button className="button is-primary" onClick={handleCloseModal}>
