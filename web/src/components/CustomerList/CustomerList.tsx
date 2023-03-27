@@ -117,7 +117,7 @@ export const CustomerList = (): JSX.Element => {
 			case NEUT_FEEL:
 				return ['badge is-warning is-light', 'fak fa-warning-medium'];
 			case NEGATIVE_FEEL:
-				return ["badge is-danger is-light", "fak fa-error-medium"]
+				return ['badge is-danger is-light', 'fak fa-error-medium'];
 			default:
 				return [];
 		}

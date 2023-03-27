@@ -92,8 +92,6 @@ export const getGraphData = async () => {
 export const getGraphFells = async () => {
 	try {
 		const response = await api.get('/FeelsClients');
-		await api.get('/FeelsClients');
-
 		return {
 			error: false,
 			data: response.data,

@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 import { useEffect, useState } from 'react';
 import { Chart, ArcElement, Legend, CategoryScale } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
@@ -8,12 +9,8 @@ import { ChartStyled, ContainerGraphStyled } from './styled';
 Chart.register(ArcElement, CategoryScale);
 
 Chart.register(Legend);
-type PropsDougnhutGraph = {
-	labelsI: Array<string>;
-	datasI: Array<string>;
-};
 
-type PropsDougnhutGraphCancelled = {
+type PropsDougnhutGraphs = {
 	labels: Array<string>;
 	datasets: any;
 };
@@ -34,8 +31,11 @@ export const Graphs = () => {
 	const colors = ['#59101D', '#921A30', '#D92748'];
 
 	const colors2 = ['#1A8226', '#BF7118', '#921A30'];
-	const [newOrderData, setNewOrderData] = useState<PropsDougnhutGraphCancelled | null>(null);
-	const [newOrderFeels, setNewOrderFeels] = useState<PropsDougnhutGraph | null>(null);
+	const [newOrderData, setNewOrderData] = useState<PropsDougnhutGraphs | null>(
+		null
+	);
+	const [newOrderFeels, setNewOrderFeels] =
+		useState<PropsDougnhutGraphs | null>(null);
 
 	const handleConvertFeel = (feel: string) => {
 		switch (feel) {
@@ -47,9 +47,6 @@ export const Graphs = () => {
 
 			case NEGATIVE_FEEL:
 				return 'Insatisfeito';
-
-			default:
-				return '';
 		}
 	};
 
@@ -60,7 +57,24 @@ export const Graphs = () => {
 			return;
 		}
 
-		setNewOrderFeels(response.data);
+		const labels = response.data.map(
+			(item: { feel: string; valor: string }) => item.feel
+		);
+		const datasets = [
+			{
+				labels: colors2,
+				data: response.data.map(
+					(item: { feel: string; valor: string }) => item.valor
+				),
+				backgroundColor: colors,
+				hoverOffset: 1,
+			},
+		];
+
+		setNewOrderFeels({
+			labels,
+			datasets,
+		});
 	};
 
 	useEffect(() => {
@@ -75,11 +89,15 @@ export const Graphs = () => {
 			return;
 		}
 
-		const labels = response.data.map((item: any) => item.tipo)
+		const labels = response.data.map(
+			(item: { feel: string; valor: string }) => item.feel
+		);
 		const datasets = [
 			{
-				labels: colors,
-				data: response.data.map((item: any) => item.valor),
+				labels: colors2,
+				data: response.data.map(
+					(item: { feel: string; valor: string }) => item.valor
+				),
 				backgroundColor: colors,
 				hoverOffset: 1,
 			},
@@ -123,12 +141,12 @@ export const Graphs = () => {
 		},
 	};
 
-	const data2 = {
-		labels: newOrderFeels?.labelsI.map((feel) => handleConvertFeel(feel)),
+	const dataFeels = {
+		labels: newOrderFeels?.labels.map((feel) => handleConvertFeel(feel)),
 		datasets: [
 			{
 				labels: colors2,
-				data: newOrderFeels?.datasI,
+				data: newOrderFeels?.datasets.map((data: any) => data * 1),
 				backgroundColor: colors2,
 				hoverOffset: 4,
 			},
@@ -137,7 +155,7 @@ export const Graphs = () => {
 
 	const config2 = {
 		type: 'doughnut',
-		data2,
+		dataFeels,
 		options: {
 			responsive: true,
 			plugins: {
@@ -164,15 +182,15 @@ export const Graphs = () => {
 		},
 	};
 
-
-
 	return (
 		<ContainerGraphStyled>
 			<ChartStyled>
 				{newOrderData && (
 					<Doughnut options={config.options} data={newOrderData} />
 				)}
-				{/* <Doughnut options={config2.options} data={data2} /> */}
+				{newOrderFeels && (
+					<Doughnut options={config2.options} data={dataFeels} />
+				)}
 			</ChartStyled>
 		</ContainerGraphStyled>
 	);
