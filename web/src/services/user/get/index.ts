@@ -79,7 +79,16 @@ export const getGraphData = async () => {
 		const response = await api.get('/HistoricChatMessages');
 		return {
 			error: false,
-			data: response.data,
+			data: response.data.map((item: any) => {
+				if (item.tipo === "Suporteruim") {
+					return {
+						...item,
+						tipo: "Suporte"
+					}
+				}
+
+				return item
+			}),
 		};
 	} catch (error) {
 		return {
