@@ -12,6 +12,23 @@ const NEGATIVE_FEEL = 'negative';
 
 const USER_CANCELLED = 'cancelado';
 
+type User = {
+		clientId: string;
+		nome: string;
+		idade: number,
+		cidade: string;
+		sexo: string;
+		tempoContrato: number;
+		disparoContratado: number;
+		usoDeDisparo: number;
+		contactHating: number;
+		tempodaPrimeiraMensagem: number;
+		setorDeCancelamento: string;
+		historicFeel: string;
+		historicoMotivo: string;
+		status: string;
+	}
+
 /**
  * @export
  * @component
@@ -22,7 +39,7 @@ const USER_CANCELLED = 'cancelado';
  */
 export const CustomerList = (): JSX.Element => {
 	const { handleSwitchModal, handleChangeUserData } = useUserData();
-	const [user, setUser] = useState<any>([]);
+	const [user, setUser] = useState<Array<User>>([]);
 
 	const getUsersData = async () => {
 		const response = await userService.get();
@@ -37,6 +54,11 @@ export const CustomerList = (): JSX.Element => {
 	useEffect(() => {
 		getUsersData();
 	}, []);
+
+	const getDataForFellGraph = () => {
+		const data = [];
+		user?.map((item) => item.)
+	}
 
 	const verifiedCustomertatus = (status: string) => {
 		if (status === USER_CANCELLED) {
@@ -85,28 +107,24 @@ export const CustomerList = (): JSX.Element => {
 		}
 	};
 
-
-
 	const handleConvertHistoric = (historic: string) => {
-		if (historic === "Suporteruim") {
-			return "Suporte"
+		if (historic === 'Suporteruim') {
+			return 'Suporte';
 		}
 
-		return historic
+		return historic;
 	};
 
 	const getStyledFeel = (feel: string) => {
-
-
 		switch (feel) {
 			case POSITIVE_FEEL:
-				return ["badge is-success is-light", "fak fa-success-medium"]
+				return ['badge is-success is-light', 'fak fa-success-medium'];
 			case NEUT_FEEL:
-				return ["badge is-warning is-light", "fak fa-warning-medium"]
+				return ['badge is-warning is-light', 'fak fa-warning-medium'];
 			case NEGATIVE_FEEL:
-				return ["badge is-danger is-light", "fak fa-error-medium"]
+				return ['badge is-danger is-light', 'fak fa-warning-medium'];
 			default:
-				return []
+				return [];
 		}
 	};
 
@@ -125,7 +143,7 @@ export const CustomerList = (): JSX.Element => {
 				</thead>
 				<tbody>
 					{user?.length > EMPTY &&
-						user?.map((customer: any) => (
+						user?.map((customer) => (
 							<tr key={Math.random()}>
 								<td>
 									<ButtonStyled
@@ -135,7 +153,7 @@ export const CustomerList = (): JSX.Element => {
 												customer.nome,
 												customer.status,
 												customer.historicFeel,
-												customer.id
+												customer.clientId
 											);
 										}}
 									>
