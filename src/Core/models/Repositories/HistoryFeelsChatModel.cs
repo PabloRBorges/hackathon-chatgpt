@@ -7,6 +7,8 @@ namespace Core.models.Repositories
     {
         [BsonElement("ClientId")]
         public string? ClientId { get; set; }
+        [BsonElement("Date")]
+        public DateTime Date { get; set; }
         [BsonElement("Text")]
         public string? Text { get; set; }
         [BsonElement("Motivo")]

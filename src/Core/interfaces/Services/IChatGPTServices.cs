@@ -14,7 +14,7 @@ namespace Core.interfaces.Services
         Task CreateChatAnalisesGPTAsync(ChatRequest chatRequest);
         Task<ICollection<ClientResponse>> GetAllClientsWithFeel();
         Task<ICollection<HistoryFeelsResponse>> GetHistoricFeelResponse(string clientId);
-        Task CreateChatMessages(string messages, string clientId);
+        Task CreateChatMessages(AnaliseChatMessageRequest messages);
         Task<ICollection<HistoryChatMessagesResponse>> GetAllMotivations();
         
     }

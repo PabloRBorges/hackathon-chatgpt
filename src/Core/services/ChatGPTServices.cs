@@ -44,7 +44,8 @@ namespace Core.services
                 Sexo = chatRequest.Sexo,
                 TempoContrato = chatRequest.TempoContrato,
                 TempodaPrimeiraMensagem = chatRequest.TempodaPrimeiraMensagem,
-                UsoDeDisparo = chatRequest.UsoDeDisparo
+                UsoDeDisparo = chatRequest.UsoDeDisparo,
+                Status = chatRequest.Status,
             };
 
             await _chatGPTRepository.CreateAsync(clientmodel);
@@ -64,15 +65,16 @@ namespace Core.services
             await _chatGPTHistoryRepository.CreateAsync(feelmodel);
         }
 
-        public async Task CreateChatMessages(string messages, string clientId)
+        public async Task CreateChatMessages(AnaliseChatMessageRequest messages)
         {
-            var result = await _chatGPT.VerifyChatMessages(messages);
+            var result = await _chatGPT.VerifyChatMessages(messages.Messages);
 
             var createChat = new HistoryFeelsChatModel()
             {
-                ClientId = clientId,
-                Text = messages,
-                Motivo = result
+                ClientId = messages.ClientId,
+                Text = messages.Messages,
+                Motivo = result,
+                Date = DateTime.Now
             };
 
             await _historyFeelsChatRepository.CreateAsync(createChat);
@@ -115,6 +117,16 @@ namespace Core.services
             foreach (var item in clientList)
             {
                 var feel = await _chatGPTHistoryRepository.GetHistoricAsync(item.ClientId);
+                var motivo = await _historyFeelsChatRepository.GetHistoricAsync(item.ClientId);
+
+                var motivoValue = "";
+                var feelValue = "";
+
+                if (motivo.Count > 0)
+                    motivoValue = motivo.Where(x => x.Date.Month == DateTime.Now.Month).FirstOrDefault().Motivo;
+
+                if (feel.Count > 0)
+                    feelValue = feel.Where(x => x.Date.Month == DateTime.Now.Month).FirstOrDefault().Feel;
 
                 var itemList = new ClientResponse()
                 {
@@ -129,7 +141,8 @@ namespace Core.services
                     TempoContrato = item.TempoContrato,
                     TempodaPrimeiraMensagem = item.TempodaPrimeiraMensagem,
                     UsoDeDisparo = item.UsoDeDisparo,
-                    HistoricFeel = feel.Where(x => x.Date.Month == DateTime.Now.Month).FirstOrDefault().Feel
+                    HistoricFeel = feelValue.Replace(" ","").Replace("\n",""),
+                    HistoricoMotivo = motivoValue.Replace(" ", "").Replace("\n","")
                 };
 
                 result.Add(itemList);
@@ -149,7 +162,7 @@ namespace Core.services
                 var itemlist = new HistoryChatMessagesResponse()
                 {
                     ClientId = item.ClientId,
-                    Motivo = item.Motivo,
+                    Motivo = item.Motivo.Replace("\n","").Replace(" ",""),
                     Text = item.Text
                 };
                 response.Add(itemlist);
@@ -168,7 +181,7 @@ namespace Core.services
                 {
                     ClientId = item.ClientId,
                     Data = item.Date,
-                    Feel = item.Feel
+                    Feel = item.Feel.Replace(" ", "")
                 };
 
                 responseList.Add(itemList);

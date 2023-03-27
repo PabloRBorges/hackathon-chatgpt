@@ -27,7 +27,7 @@ namespace Api.ChatGPT.Controllers
         [HttpPost]
         public async Task Post([FromBody] AnaliseChatMessageRequest messages)
         {
-            await _chatGPTServices.CreateChatMessages(messages.Messages, messages.ClientId);
+            await _chatGPTServices.CreateChatMessages(messages);
         }
     }
 }
