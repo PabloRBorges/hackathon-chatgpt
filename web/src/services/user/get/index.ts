@@ -43,7 +43,7 @@ function getMonthInPortuguese(dataString: string) {
 	const data = new Date(dataString);
 	const mes = data.getMonth();
 
-	return meses[mes];
+	return `${meses[mes]} de ${data.getFullYear()}`;
 }
 
 export const getFeels = async (id: string) => {
