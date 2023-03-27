@@ -47,5 +47,8 @@ namespace Core.models.Responses
 
         [JsonProperty("HistoricoMotivo", NullValueHandling = NullValueHandling.Ignore)]
         public string HistoricoMotivo { get; set; }
+
+        [JsonProperty("Status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; set; }
     }
 }

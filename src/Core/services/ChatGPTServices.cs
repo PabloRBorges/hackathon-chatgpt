@@ -142,7 +142,8 @@ namespace Core.services
                     TempodaPrimeiraMensagem = item.TempodaPrimeiraMensagem,
                     UsoDeDisparo = item.UsoDeDisparo,
                     HistoricFeel = feelValue.Replace(" ","").Replace("\n",""),
-                    HistoricoMotivo = motivoValue.Replace(" ", "").Replace("\n","")
+                    HistoricoMotivo = motivoValue.Replace(" ", "").Replace("\n",""),
+                    Status = item.Status
                 };
 
                 result.Add(itemList);
