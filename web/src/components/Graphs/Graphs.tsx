@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Chart, ArcElement, Legend, CategoryScale } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { ChartStyled, ContainerGraphStyled } from './styled';
@@ -68,7 +68,36 @@ export const Graphs = () => {
 				},
 				title: {
 					display: true,
-					text: 'Todos os envios',
+					text: 'Motivos do cancelamento',
+					color: '#000000',
+					font: {
+						size: 16,
+					},
+				},
+			},
+
+			animation: {
+				duration: 2000,
+				animateScale: true,
+				animateRotate: true,
+			},
+		},
+	};
+
+	const config2 = {
+		type: 'doughnut',
+		data,
+		options: {
+			responsive: true,
+			plugins: {
+				legend: {
+					display: true,
+					fullSize: true,
+					position: 'right' as any,
+				},
+				title: {
+					display: true,
+					text: 'Sentimentos dos clientes',
 					color: '#000000',
 					font: {
 						size: 16,
@@ -100,7 +129,7 @@ export const Graphs = () => {
 		<ContainerGraphStyled>
 			<ChartStyled>
 				<Doughnut options={config.options} data={data} />
-				<Doughnut options={config.options} data={data2} />
+				<Doughnut options={config2.options} data={data2} />
 			</ChartStyled>
 		</ContainerGraphStyled>
 	);

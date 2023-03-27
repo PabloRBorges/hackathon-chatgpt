@@ -1,5 +1,4 @@
 import CustomerList from '@src/components/CustomerList';
-import Filters from '@src/components/Filters';
 import Graphs from '@src/components/Graphs';
 import Menu from '@src/components/Menu';
 import MenuSide from '@src/components/MenuSide';
@@ -19,7 +18,6 @@ export const Container = () => {
 			<Menu />
 
 			<ContainerStyled>
-				<Filters />
 				<Graphs />
 				<CustomerList />
 			</ContainerStyled>

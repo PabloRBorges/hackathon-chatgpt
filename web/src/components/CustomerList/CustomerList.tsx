@@ -1,44 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
 	EMPTY,
-	MOCK_TABLE,
 	STATUS_CANCELED,
 	STATUS_CANCELLING,
-	STATUS_NOT_CANCELLING,
 } from '@src/configuration/contants/constants';
+import userService from '@src/services/user'
 
-import debouncedSave from '@src/utils/deboucedSave';
 import { useUserData } from '@src/Providers/UserData/useUserData';
 import {
-<<<<<<< Updated upstream
 	ButtonStyled,
-=======
->>>>>>> Stashed changes
-	ContentSearchStyled,
-	IconSearchStyled,
-	InputStyled,
 	MenuSideStyled,
 	WrapperTableAreaStyled,
 } from './styled';
-import { LoadingTable } from './LoadingTable/LoadingTable';
-import EmptyMessage from '../EmptyMessage';
-import { Customersearch } from './CustomerSearch';
-import { usePagination } from '../Pagination/usePagination';
 
-type Status = {
-	label: string;
-	value: number;
-};
+const NEUT_FEEL = "neut"
+const POSITIVE_FEEL = "positive"
+const NEGATIVE_FEEL = "negative"
 
-type Customers = {
-	name: string;
-	historic: Array<string>;
-	contractTime: string;
-	date: string;
-	status: string;
-	sentiment: string;
-};
 
 /**
  * @export
@@ -49,25 +28,24 @@ type Customers = {
  * Responsável por a área de listas de cancelamentos.
  */
 export const CustomerList = (): JSX.Element => {
-<<<<<<< Updated upstream
 	const { handleSwitchModal, handleChangeUserData } = useUserData();
-	const [listTable, setListTable] = useState<Array<Customers>>(MOCK_TABLE);
-	const [isLoading, setIsLoading] = useState(false);
-=======
-	const [listTable, setListTable] = useState<Array<Customers>>(MOCK_TABLE);
-	const [isLoading, setIsLoading] = useState(false);
-	const [selected, setSelected] = useState<Array<Status>>([]);
-	const [query, setQuery] = useState('');
-	const [pageNumber, setPageNumber] = useState(1);
+	const [user, setUser] = useState<any>([]);
 
-	const handlePagination = (e) => {
-		setQuery(e.target.value);
-		setPageNumber(1);
-	};
 
-	usePagination(query, pageNumber);
+	const getUsersData = async () => {
+		const response = await userService.get();
+		if (response.error) {
+			// Should be implement a logic when api return error
+			return
+		}
 
->>>>>>> Stashed changes
+		setUser(response.data)
+	}
+
+	useEffect(() => {
+		getUsersData()
+	}, [])
+
 	const verifiedCustomertatus = (status: string) => {
 		if (status === STATUS_CANCELED) {
 			return (
@@ -99,118 +77,78 @@ export const CustomerList = (): JSX.Element => {
 		);
 	};
 
-	// Fim do destaque
-
-	const handleSearchCustomers = (contentInput: string) => {
-		const filterTable = MOCK_TABLE.filter((item) =>
-			item.name.toLowerCase().includes(contentInput.toLowerCase())
-		);
-
-<<<<<<< Updated upstream
-		const filterStatusTable = MOCK_TABLE.filter((item) =>
-			[selected].includes(item.status)
-		);
-
-		console.log(filterStatusTable);
-=======
->>>>>>> Stashed changes
-		debouncedSave({
-			filterValue: filterTable,
-			setValue: setListTable,
-			setIsLoading,
-		});
-	};
-
-<<<<<<< Updated upstream
 	const handleViewFullDataUser = (
 		name: string,
 		status: string,
-		sentiment: string
+		sentiment: string,
+		id: string,
 	) => {
-		handleChangeUserData({ name, status, sentiment });
+		handleChangeUserData({ name, status, sentiment, id });
 		handleSwitchModal();
 	};
 
-	const mockLoading = [1, 2, 3, 4, 5];
-	const [selected, setSelected] = useState([]);
-=======
-	const mockLoading = [1, 2, 3, 4, 5];
->>>>>>> Stashed changes
+	const handleConvertFeel = (feel: string) => {
 
-	const data = [
-		{
-			label: STATUS_CANCELLING,
-			value: 1,
-		},
-		{ label: STATUS_CANCELED, value: 2 },
-		{ label: STATUS_NOT_CANCELLING, value: 3 },
-	];
+		switch (feel) {
+			case NEUT_FEEL:
+				return 'Satisfeito'
+
+			case POSITIVE_FEEL:
+				return 'Muito Satisfeito'
+
+			case NEGATIVE_FEEL:
+				return 'Insatisfeito'
+
+			default:
+				return ''
+		}
+	}
 
 	return (
 		<WrapperTableAreaStyled>
 			<MenuSideStyled>Cancelamentos</MenuSideStyled>
-			<Customersearch
-				options={data}
-				selected={selected}
-				setSelected={setSelected}
-				handleSearchCustomers={handleSearchCustomers}
-			/>
-			{!isLoading && listTable.length === EMPTY && (
-				<EmptyMessage message="Ops, não encontramos nenhum cliente, verifique seus filtros" />
-			)}
-			{isLoading &&
-				mockLoading.map((loading) => (
-					<td key={loading}>
-						<LoadingTable />{' '}
-					</td>
-				))}
 
 			<table className="table is-fullwidth">
 				<thead>
 					<tr>
 						<th>Nome</th>
 						<th>Motivos</th>
-						<th>Data</th>
 						<th>Status</th>
 						<th>Sentimento</th>
 					</tr>
 				</thead>
 				<tbody>
-					{!isLoading &&
-						listTable.length > EMPTY &&
-						listTable.map((customer) => (
+					{
+						user?.length > EMPTY &&
+						user?.map((customer: any) => (
 							<tr key={Math.random()}>
-<<<<<<< Updated upstream
 								<td>
 									<ButtonStyled
 										type="button"
 										onClick={() => {
 											handleViewFullDataUser(
-												customer.name,
+												customer.nome,
 												customer.status,
-												customer.sentiment
+												customer.historicFeel,
+												customer.id
 											);
 										}}
 									>
-										{customer.name}
+										{customer.nome}
 									</ButtonStyled>
 								</td>
-=======
-								<td>{customer.name}</td>
->>>>>>> Stashed changes
 
 								<td>
 									Histórico de motivos{' '}
-									<small>{customer.historic.map((item) => item)}</small>
+									<small>{customer.historicFeel}</small>
 								</td>
-								<td>{customer.date}</td>
 								<td>{verifiedCustomertatus(customer.status)}</td>
 
-								<td>{customer.sentiment}</td>
-							</tr>
+								<td>{handleConvertFeel(customer.historicFeel)}</td>
+							</tr >
 						))}
-				</tbody>
-			</table>
-		</WrapperTableAreaStyled>
+				</tbody >
+			</table >
+		</WrapperTableAreaStyled >
 	);
 };

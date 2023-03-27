@@ -1,8 +1,5 @@
 import styled from 'styled-components';
-<<<<<<< Updated upstream
-=======
 import { MultiSelect } from 'react-multi-select-component';
->>>>>>> Stashed changes
 
 export const WrapperTableAreaStyled = styled.div`
 	margin: 2rem 6rem 6rem;
@@ -15,42 +12,6 @@ export const MenuSideStyled = styled.h3`
 	padding-top: 2rem;
 `;
 
-<<<<<<< Updated upstream
-export const InputStyled = styled.input`
-  width: 300px;
-  height: 2rem;
-  border: none;
-  border-radius: 0.5rem;
-  box-shadow: 1px;
-  margin-bottom: 2rem;
-  margin-top: 0.25rem;
-  padding-left: 1rem;
-
-  ::placeholder {
-    font-weight: 400;
-    opacity: 0.7;
-    color: #b6b6b6;
-  }
-
-	:focus {
-		outline: none;
-		padding-left: 1rem;
-
-    ::placeholder {
-      padding-left: 2px;
-    }
-  }
-`;
-
-export const IconSearchStyled = styled.div`
-  width: 0.75rem;
-  position: absolute;
-  margin-top: 2rem;
-  left: 370px;
-`;
-
-=======
->>>>>>> Stashed changes
 export const ContentSearchStyled = styled.div`
   font-size: 0.75rem;
   color: #888;

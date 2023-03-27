@@ -1,31 +1,50 @@
 /* eslint-disable default-case */
 import { Chart, ArcElement, CategoryScale, registerables } from 'chart.js';
+import { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
+import userService from '@src/services/user';
 
 Chart.register(ArcElement, CategoryScale);
 
 Chart.register(...registerables);
 
-export const LineGraph = () => {
-	const data = {
-		labels: [
-			'Janeiro',
-			'Fevereiro',
-			'Março',
-			'Abril',
-			'Maio',
-			'Junho',
-			'Julho',
-		],
-		datasets: [
+type Props = {
+	id: string;
+}
+
+export const LineGraph = ({ id }: Props) => {
+	const [data, setData] = useState<any>(null);
+
+	const getAllGraphData = async () => {
+		const response = await userService.getFeels(id);
+
+		if (response.error) {
+			//logic to error
+			return;
+		}
+
+
+		const labels = response.data.map((item: any) => item.data)
+		const datasets = [
 			{
 				label: 'Sentimentos',
-				data: [1, 2, 3, 3, 2, 1, 2],
+				data: response.data.map((item: any) => item.value),
 				fill: false,
 				borderColor: '#5A4CFB',
 			},
-		],
-	};
+		];
+
+		setData({
+			labels: labels,
+			datasets: datasets,
+		});
+
+	}
+
+	useEffect(() => {
+		getAllGraphData();
+	}, [])
+
 
 	const config = {
 		type: 'line',
@@ -100,5 +119,13 @@ export const LineGraph = () => {
 		},
 	};
 
-	return <Line data={data} options={config.options} />;
+	return (
+		<>
+			{
+				data && (
+					<Line data={data} options={config.options} />
+				)
+			}
+		</>
+	);
 };

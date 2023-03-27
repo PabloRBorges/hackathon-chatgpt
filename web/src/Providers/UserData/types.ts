@@ -6,6 +6,7 @@ export type CreateContextData = {
 };
 
 export type UserDataType = {
+	id: string;
 	name: string;
 	sentiment: string;
 	status: string;
